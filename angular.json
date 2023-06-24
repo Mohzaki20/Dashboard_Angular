@@ -87,12 +87,24 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css"
             ],
             "scripts": []
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2,
+            "browserTarget": "dashboard:build:production"
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "f9db62fb-139f-4a37-8f57-7e815e3a2c42"
   }
 }

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "fir-eb561": {
+      "hosting": {
+        "dashboard": [
+          "fir-eb561"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "fir-eb561"
+  }
+}

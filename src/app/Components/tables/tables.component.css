@@ -1,0 +1,16 @@
+table{
+  background-color: black !important;
+  width: 95%;
+}
+tr{
+  background-color: gray;
+}
+td{
+  background-color: lightgrey;
+}
+table, th, td {
+  border: 1px solid black;
+}
+fa-icon{
+  
+}
