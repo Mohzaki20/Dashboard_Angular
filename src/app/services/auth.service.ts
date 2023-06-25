@@ -32,7 +32,13 @@ export class AuthService {
   }
 
   loginwithgoogle(){
-    return this.fireauth.signInWithPopup(new GoogleAuthProvider());
+    return this.fireauth.signInWithPopup(new GoogleAuthProvider()).then(()=>{
+      localStorage.setItem('token','true');
+      this.route.navigate(['/home'])
+    },err=>{
+      alert(err.message)
+      this.route.navigate(['/register']);
+    });
   }
   getUid() {
     var user=''
@@ -55,4 +61,5 @@ export class AuthService {
       alert(err.message)
     })
   }
+
 }
