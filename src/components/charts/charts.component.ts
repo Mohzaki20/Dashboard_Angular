@@ -10,7 +10,6 @@ Chart.register(...registerables)
   styleUrls: ['./charts.component.css']
 })
 export class ChartsComponent implements OnInit {
-  constructor() { }
   ngOnInit(): void {
     this.RenderChart();
   }
@@ -24,7 +23,7 @@ export class ChartsComponent implements OnInit {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
           label: '# of Votes',
-          data: [12, 11, 3, 5, 2, 3],
+          data: [12, 11, 33, 5, 2, 3],
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(255, 159, 64, 0.2)',
