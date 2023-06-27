@@ -11,6 +11,25 @@ td{
 table, th, td {
   border: 1px solid black;
 }
-fa-icon{
-  
+form{
+  width: 80%;
+  margin-left: 2%;
+}
+.addProductButton{
+  margin-top: 3%;
+}
+.AddBtn{
+  margin: 3%;
+  margin-left: 80%;
+}
+.categorySelectorViewLabel{
+  margin-top: 3%;
+}
+.categorySelectorView{
+  margin-bottom: 3%;
+  width: 40%;
+}
+.PrdImg{
+  width: 100px !important;
+  height: 100px !important;
 }

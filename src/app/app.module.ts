@@ -6,9 +6,13 @@ import { TablesComponent } from './Components/tables/tables.component';
 // import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faTrashAlt,faEdit } from '@fortawesome/free-solid-svg-icons';
-import { initializeApp } from "firebase/app";
+// import { initializeApp } from "firebase/app";
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
+import { FormsModule , ReactiveFormsModule} from '@angular/forms';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -17,9 +21,14 @@ import { environment } from '../environments/environment';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     FontAwesomeModule,
+    ReactiveFormsModule ,
     AngularFireModule.initializeApp(environment.firebase),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [],
   bootstrap: [AppComponent]
