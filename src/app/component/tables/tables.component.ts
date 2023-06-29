@@ -24,8 +24,8 @@ export class TablesComponent implements OnInit {
   price: number = 0;
   SellerId: string = '';
   title: string = '';
-  // faTrashAlt = faTrashAlt;
-  // faEdit = faEdit;
+  faTrashAlt = faTrashAlt;
+  faEdit = faEdit;
   category: string = "";
   category2: string = "";
 
