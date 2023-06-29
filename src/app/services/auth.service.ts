@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { GoogleAuthProvider } from '@angular/fire/auth';
 import {AngularFireAuth} from '@angular/fire/compat/auth'
 import { Router } from '@angular/router';
-import { Userinfo } from '../models/userinfo';
+import { Userinfo } from '../Models/userinfo';
 import Swal from 'sweetalert2';
 @Injectable({
   providedIn: 'root'

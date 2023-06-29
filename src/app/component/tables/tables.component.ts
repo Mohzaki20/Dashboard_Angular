@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
-import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
+// import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { ICategory } from 'src/app/Models/IProduct';
 import { ProductService } from 'src/app/Services/product.service';
 @Component({
@@ -24,8 +24,8 @@ export class TablesComponent implements OnInit {
   price: number = 0;
   SellerId: string = '';
   title: string = '';
-  faTrashAlt = faTrashAlt;
-  faEdit = faEdit;
+  // faTrashAlt = faTrashAlt;
+  // faEdit = faEdit;
   category: string = "";
   category2: string = "";
 
