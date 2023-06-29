@@ -1,0 +1,44 @@
+<p>home-mos works!</p>
+
+
+<div class="d-flex">
+<div >
+  hello user
+  <button (click)="getuser()">get</button>
+  <button    [swal]="['Oops!', 'This is not implemented yet :/', 'warning']" >getdata</button>
+
+  <div>userid: {{userid}}</div>
+  <button (click)="logout()">logout</button>
+  <div class="imagediv">
+  <img [src]="base64" alt=""   style="width: 100%; height: 100%;border-radius: 50%; border: 1px solid gray; box-shadow: 2px 2px 2px 2px gray;"/>
+  <input type="file"   class="form-control" id="Img"  name="img" (change)="getImagepath($event)"  style="width: 100px;">
+   </div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+

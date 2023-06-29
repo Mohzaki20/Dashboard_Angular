@@ -1,0 +1,116 @@
+
+<div class="container bg-dark">
+
+  <div class="card o-hidden border-0 shadow-lg my-5  w-100">
+      <div class="card-body p-0 ">
+          <!-- Nested Row within Card Body -->
+          <div class="row ">
+              <div class="col-lg-5 d-none d-lg-block bg-register-image "></div>
+              <div class="col-lg-7">
+                  <div class="p-5 ">
+                      <div class="text-center">
+                          <h1 class="h4 text-gray-900 mb-2">Create an Account!</h1>
+                      </div>
+                      <form class="user" autocomplete="off" [formGroup]="registform"  >
+                          <div class="form-group row">
+                              <div class="col-sm-6 mb-3 mb-sm-0">
+                                  <input   type="text" class="form-control form-control-user" id="exampleFirstName"
+                                   name="firstName"
+                                   [class.is-valid]="registform.get('firstName')?.valid"
+                                   formControlName="firstName"
+                                   [ngClass]="{'is-invalid':(registform.get('firstName')?.touched||registform.get('firstName')?.dirty)
+                                   && !registform.get('firstName')?.valid}"
+                                  placeholder="First Name">
+                                  <div  class="text-danger errormessage" [hidden]="registform.get('firstName')?.valid ||registform.get('firstName')?.untouched">
+                                    <div *ngIf="(registform.get('firstName')?.errors?.['required'])" >required</div>
+                                    <div *ngIf="(registform.get('firstName')?.errors?.['pattern'])">first name is invalid</div>
+
+                                  </div>
+
+
+                              </div>
+                              <div class="col-sm-6">
+                                  <input  type="text" class="form-control form-control-user" id="exampleLastName"
+                                  name="lastName"
+                                  [class.is-valid]="registform.get('lastName')?.valid"
+                                  formControlName="lastName"
+                                  [ngClass]="{'is-invalid':(registform.get('lastName')?.touched||registform.get('lastName')?.dirty)
+                                  && !registform.get('lastName')?.valid}"
+                                      placeholder="Last Name">
+                                      <div  class="text-danger errormessage" [hidden]="registform.get('lastName')?.valid ||registform.get('lastName')?.untouched">
+                                        <div *ngIf="(registform.get('lastName')?.errors?.['required'])" >required</div>
+                                        <div *ngIf="(registform.get('lastName')?.errors?.['pattern'])">last name is invalid</div>
+
+                                      </div>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <input   type="email" class="form-control form-control-user" id="exampleInputEmail"
+                              name="email"
+                              formControlName="email"
+                              [class.is-valid]="registform.get('email')?.valid"
+                              [ngClass]="{'is-invalid':(registform.get('email')?.touched||registform.get('email')?.dirty)
+                              && !registform.get('email')?.valid}"
+                                  placeholder="Email Address">
+                                  <div  class="text-danger errormessage" [hidden]="registform.get('email')?.valid ||registform.get('email')?.untouched">
+                                    <div *ngIf="(registform.get('email')?.errors?.['required'])" >required</div>
+                                    <div *ngIf="(registform.get('email')?.errors?.['email'])">email is invalid</div>
+
+                                  </div>
+                          </div>
+                          <div class="form-group row">
+                              <div class="col-sm-6 mb-3 mb-sm-0">
+                                  <input  type="password" class="form-control form-control-user"
+                                name="password"
+                                  formControlName="password"
+                                  [class.is-valid]="registform.get('password')?.valid"
+
+                                  [ngClass]="{'is-invalid':(registform.get('password')?.touched||registform.get('password')?.dirty)
+                                  && !registform.get('password')?.valid}"
+                                      id="exampleInputPassword" placeholder="Password">
+                                      <div  class="text-danger errormessage" [hidden]="registform.get('Password')?.valid ||registform.get('Password')?.untouched">
+                                        <div *ngIf="(registform.get('Password')?.errors?.['required'])" >required</div>
+                                        <div *ngIf="(registform.get('Password')?.errors?.['minLength'])">password at lest 6 characters</div>
+
+                                      </div>
+                              </div>
+                              <div class="col-sm-6">
+                                  <input  type="password" class="form-control form-control-user"
+                                formControlName="repeatpassword"
+                                [class.is-valid]="registform.get('repeatpassword')?.valid"
+                                  [ngClass]="{'is-invalid':(registform.get('repeatpassword')?.touched||registform.get('repeatpassword')?.dirty)
+                                  && !registform.get('repeatpassword')?.valid}"
+                                    id="exampleRepeatPassword" placeholder="Repeat Password">
+
+                                      <div  class="text-danger errormessage" [hidden]="registform.get('repeatpassword')?.valid ||registform.get('repeatpassword')?.untouched">
+                                        <div *ngIf="(registform.get('repeatpassword')?.errors?.['required'])" >required</div>
+                                        <div *ngIf="(registform.get('repeatpassword')?.errors?.['minLength'])">password at lest 6 characters</div>
+
+                                      </div>
+                              </div>
+                          </div>
+                          <button (click)="register()" [disabled]="registform.invalid" class="btn btn-primary btn-user btn-block">
+                              Register Accounts
+                          </button>
+                          <hr>
+                          <a (click)="registwithgoogle()" class="btn btn-google btn-user btn-block">
+                              <i class="fab fa-google fa-fw"></i> Register with Google
+                          </a>
+                          <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                              <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                          </a>
+                      </form>
+                      <hr>
+                      <div class="text-center">
+                          <a class="small" href="forgot-password.html">Forgot Password?</a>
+                      </div>
+                      <div class="text-center">
+                          <a class="small" href="/login">Already have an account? Login!</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+</div>
