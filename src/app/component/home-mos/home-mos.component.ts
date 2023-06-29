@@ -8,11 +8,17 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HomeMosComponent implements OnInit{
    userid: string=''
+   base64: any;
+   Img:any;
+   daat: any;
   constructor(private auth:AuthService){}
   ngOnInit(): void {
 
       this.auth.getUid();
       this.userid = localStorage.getItem('uid')||'';
+
+
+
 
 
 
@@ -25,8 +31,24 @@ export class HomeMosComponent implements OnInit{
 
   }
 
+  getdata(){
+
+   this.auth.getuserdata();
+
+  }
+
   logout(){
     this.auth.logout();
+  }
+
+  getImagepath(event:any){
+    const file = event.target.files[0];
+    const reader=new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () =>{
+      this.base64=reader.result;
+      this.Img=this.base64;
+    }
   }
 
 

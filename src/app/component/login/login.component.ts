@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -7,24 +8,25 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent  implements OnInit{
-  email: string='';
-  password: string='';
+  loginform:FormGroup;
 
-  constructor(private auth:AuthService){}
+
+  constructor(private auth:AuthService ,private fb:FormBuilder){
+    this.loginform=this.fb.group({
+      email:['', [Validators.required,Validators.email]],
+      password:['', [Validators.required,Validators.minLength(6)]]
+    })
+  }
   ngOnInit(): void {
+
+
   }
 
 
   login(){
-    if(this.email==''){
-      alert('Please enter a valid email')
-    }
-    if(this.password==''){
-      alert('Please enter a valid password')
-    }
-    this.auth.login(this.email, this.password)
-    this.email='';
-    this.password='';
+    const userdata=Object.assign(this.loginform.value,{email:this.loginform.value.email})
+    this.auth.login(userdata)
+
   }
   loginwithgoogle(){
     this.auth.loginwithgoogle();

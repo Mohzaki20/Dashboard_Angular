@@ -9982,6 +9982,11 @@ a:focus {
 .bg-gray-900 {
   background-color: #3a3b45 !important;
 }
+.errormessage{
+  height: 10px;
+  padding-left: 5%;
+  font-size: 1.2rem;
+}
 
 .o-hidden {
   overflow: hidden !important;
@@ -10883,13 +10888,13 @@ form.user .custom-checkbox.small label {
 }
 
 form.user .form-control-user {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   border-radius: 10rem;
-  padding: 2rem 1rem;
+  padding: 2.2rem 1rem;
 }
 
 form.user .btn-user {
-  font-size: 1rem;
+  font-size: 1.2rem;
   border-radius: 10rem;
   padding: 0.75rem 1rem;
 }

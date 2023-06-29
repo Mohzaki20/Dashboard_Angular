@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Userinfo } from 'src/app/models/userinfo';
 import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-register',
@@ -7,36 +8,42 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  firstName: string='';
-  lastName: string='';
-  email : string = '';
-  password: string='';
-  repeatpassword: string='';
-  //  userform:FormGroup;
+    registform:FormGroup;
+    userinfo:Userinfo={} as Userinfo;
+   imag:any;
 
-  constructor(private auth:AuthService,private fb:FormBuilder){
-    // this.userform=fb.group({
-    //   firstName:['',Validators.required,Validators.pattern('[a-zA-Z]{3,}')],
-    //   lastName:['',Validators.required,Validators.pattern('[a-zA-Z]{3,}')],
-    //   email:['',Validators.required,Validators.email],
-    //   password:['',Validators.required,Validators.pattern('[a-zA-Z0-9]{8,}')],
-    //   repeatpassword:['',Validators.required,Validators.pattern('[a-zA-Z0-9]{8,}')],
 
-    // })
+  constructor(private auth:AuthService ,private fb:FormBuilder){
+    this.registform=this.fb.group({
+      firstName:['', [Validators.required,Validators.pattern('[a-zA-Z]{3,}')]],
+      lastName:['', [Validators.required,Validators.pattern('[a-zA-Z]{3,}')]],
+      email:['', [Validators.required,Validators.email]],
+      password:['', [Validators.required,Validators.minLength(6)]],
+      repeatpassword:['', [Validators.required,Validators.minLength(6)]],
+
+    })
   }
   ngOnInit(): void {
   }
 
   register(){
-    if(this.email==''){
-      alert('plesea enter email')
+    this.userinfo={
+      firstname:this.registform.value.firstName,
+      lastname:this.registform.value.lastName,
+      email:this.registform.value.email,
+      password:this.registform.value.password,
+      Userimg:this.imag,
+      uid:''
     }
-    if(this.password==''){
-      alert('plesea enter password')
-    }
-    this.auth.register(this.email, this.password)
-    this.email='';
-    this.password='';
+    const all=this.auth.adduserdata(this.userinfo)
+    console.log(this.userinfo);
+    console.log(all);
+
+    console.log("hello");
+
+
+    this.auth.register(this.registform.value.email,this.registform.value.password)
+
   }
   registwithgoogle(){
     this.auth.loginwithgoogle()
