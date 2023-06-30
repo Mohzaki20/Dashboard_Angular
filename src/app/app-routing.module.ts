@@ -10,7 +10,7 @@ const routes: Routes = [
 {path:"home", component:HomeMosComponent}
 
 
-];
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

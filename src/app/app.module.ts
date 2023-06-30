@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { AngularFireModule } from "@angular/fire/compat";
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -12,7 +13,6 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { HomeMosComponent } from './component/home-mos/home-mos.component';
-import { AngularFireModule } from '@angular/fire/compat';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 @NgModule({
   declarations: [
@@ -20,9 +20,10 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     LoginComponent,
     RegisterComponent,
     HomeMosComponent,
-
-
   ],
+
+
+
   imports: [
     BrowserModule,
     AppRoutingModule,
