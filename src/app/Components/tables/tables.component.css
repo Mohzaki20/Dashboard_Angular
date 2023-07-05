@@ -1,16 +1,16 @@
-table{
+/* table{
   background-color: black !important;
   width: 95%;
-}
-tr{
-  background-color: gray;
+} */
+/* tr{
+  background-color: rgb(132, 129, 129);
 }
 td{
   background-color: lightgrey;
-}
-table, th, td {
+} */
+/* table, th, td {
   border: 1px solid black;
-}
+} */
 form{
   width: 80%;
   margin-left: 2%;
@@ -32,4 +32,20 @@ form{
 .PrdImg{
   width: 100px !important;
   height: 100px !important;
+}
+.mat-elevation-z8 {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  /* width: 25%; */
+  background-color: rgb(239, 243, 243);
+}
+.mat-sort-header{
+  color: black;
 }

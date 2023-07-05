@@ -1,15 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
-import { ICategory } from 'src/app/Models/IProduct';
+import { ICategory } from 'src/app/Models/ICategory';
 import { ProductService } from 'src/app/Services/product.service';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+
 @Component({
   selector: 'app-tables',
   templateUrl: './tables.component.html',
   styleUrls: ['./tables.component.css'],
 })
 export class TablesComponent implements OnInit {
-  prdDetails!: FormGroup;
+  displayedColumns: string[] = [
+    'id',
+    'brand',
+    'images',
+    'SellerId',
+    'price',
+    'title',
+    'actions'
+  ];
+  dataSource: MatTableDataSource<ICategory>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  productId: string;
+  editForm: FormGroup;
   productsList: ICategory[] = [];
   productObj: ICategory = {
     brand: '',
@@ -18,6 +44,7 @@ export class TablesComponent implements OnInit {
     SellerId: '',
     title: '',
   };
+  updatedObj!: ICategory;
   id: string = '';
   brand: string = '';
   images: string[] = [];
@@ -26,23 +53,41 @@ export class TablesComponent implements OnInit {
   title: string = '';
   faTrashAlt = faTrashAlt;
   faEdit = faEdit;
-  category: string = "";
-  category2: string = "";
-
+  category: string = '';
+  category2: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
-    private products: ProductService
+    private products: ProductService,
+    // private location: Location,
+    private _liveAnnouncer: LiveAnnouncer
   ) {}
   ngOnInit(): void {
     this.getAllProducts(this.category2);
-    this.prdDetails = this.formBuilder.group({
-      id: [''],
-      brand: [''],
-      images: [''],
-      price: [''],
-      SellerId: [''],
-      title: [''],
+    // this.prdDetails = this.formBuilder.group({
+    //   id: [''],
+    //   brand: [''],
+    //   images: [''],
+    //   price: [''],
+    //   SellerId: [''],
+    //   title: [''],
+    // });
+    // this.productId = this.actRoute.snapshot.paramMap.get('id');
+    this.editForm = this.formBuilder.group({
+      id: [this.productObj.id],
+      brand: [this.productObj.brand],
+      images: [this.productObj.images],
+      price: [this.productObj.price],
+      SellerId: [this.productObj.SellerId],
+      title: [this.productObj.title],
+    });
+    this.editForm = new FormGroup({
+      id: new FormControl(''),
+      brand: new FormControl(''),
+      images: new FormControl([]),
+      price: new FormControl(0),
+      SellerId: new FormControl(''),
+      title: new FormControl(''),
     });
   }
   resetForm() {
@@ -53,16 +98,8 @@ export class TablesComponent implements OnInit {
     this.SellerId = '';
     this.title = '';
   }
-  // resetForm() {
-  //   this.brand = '';
-  //   this.id = '';
-  //   this.images = [];
-  //   this.price = 0;
-  //   this.SellerId = '';
-  //   this.title = '';
-  //   this.prdDetails.reset();
-  // }
-  getAllProducts(categories : string) {
+
+  getAllProducts(categories: string) {
     this.products.getProducts(categories).subscribe(
       (res) => {
         this.productsList = res.map((e: any) => {
@@ -70,6 +107,9 @@ export class TablesComponent implements OnInit {
           data.id = e.payload.doc.id;
           return data;
         });
+        this.dataSource = new MatTableDataSource(this.productsList);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       },
       (err) => {
         return alert('error');
@@ -78,7 +118,7 @@ export class TablesComponent implements OnInit {
   }
   deleteProduct(product: ICategory) {
     if (window.confirm('Are you sure you want to delete this product?')) {
-      this.products.deleteProduct(product,this.category2);
+      this.products.deleteProduct(product, this.category2);
     }
   }
   addProduct() {
@@ -99,17 +139,17 @@ export class TablesComponent implements OnInit {
       this.productObj.price = this.price;
       this.productObj.SellerId = this.SellerId;
       this.productObj.title = this.title;
-      this.products.addProduct(this.productObj,this.category);
-      if (this.id) {
-        this.productObj.id = this.id;
-        this.products.updateProduct(this.productObj,this.category);
-      } else {
-        this.products.addProduct(this.productObj,this.category);
-      }
+      this.products.addProduct(this.productObj, this.category);
+      // if (this.id) {
+      //   this.productObj.id = this.id;
+      //   this.products.updateProduct(this.productObj,this.category);
+      // } else {
+      //   this.products.addProduct(this.productObj,this.category);
+      // }
       this.resetForm();
     }
   }
-  onChange(){
+  onChange() {
     this.getAllProducts(this.category2);
   }
   // updateProduct(prd:ICategory){
@@ -124,20 +164,63 @@ export class TablesComponent implements OnInit {
   // updateProduct(product: ICategory) {
   //   this.products.updateProduct(product);
   // }
-  updateproduct(product : ICategory) {
-    // this.deleteProduct(this.productObj);
-    // this.addProduct();
-    this.products.updateProduct(product,this.category);
+  setData() {
+    this.updateData();
+    this.products
+      .GetProduct(this.productId, this.category)
+      .valueChanges()
+      .subscribe((data) => {
+        this.editForm.setValue(data);
+      });
   }
-  editProduct(product: ICategory) {
-    console.log('Editing product:', product);
-    this.prdDetails.setValue({
-      id: product.id,
-      brand: product.brand,
-      images: product.images,
-      price: product.price,
-      SellerId: product.SellerId,
-      title: product.title,
+
+  updateData() {
+    this.editForm = this.formBuilder.group({
+      id: ['', [Validators.required]],
+      brand: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      title: ['', [Validators.required]],
+      images: ['', [Validators.required]],
+      SellerId: ['', [Validators.required]],
     });
   }
+
+  updateproduct(product: ICategory) {
+    // this.deleteProduct(this.productObj);
+    // this.addProduct();
+    console.log(product);
+    this.products.UpdateProduct(this.updatedObj, this.id, this.category);
+  }
+
+  editProduct() {
+    // console.log('Editing product:', product);
+    // console.log(this.editForm);
+    // this.updatedObj = product;
+
+    // this.editForm.setValue({
+    //   id: product.id,
+    //   brand: product.brand,
+    //   images: product.images,
+    //   price: product.price,
+    //   SellerId: product.SellerId,
+    //   title: product.title,
+    // });
+    console.log(this.editForm);
+
+    this.products.UpdateProduct(
+      this.editForm.value,
+      this.productId,
+      this.category
+    );
+    alert(this.editForm.controls['title'].value + ' updated successfully');
+  }
+  // announceSortChange(sortState: Sort) {
+  //   // This example uses English messages. If your application supports
+  //   // multiple language, you would internationalize these strings.
+  //   // Furthermore, you can customize the message to add additional
+  //   // details about the values being sorted.
+  //   if (sortState.direction) {
+  //     this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+  //   }
+  // }
 }
