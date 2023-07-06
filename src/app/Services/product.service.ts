@@ -1,12 +1,14 @@
-import { ICategory } from '../Models/IProduct';
+import { ICategory } from '../models/IProduct';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormGroup } from '@angular/forms';
+import { UserInfo } from 'firebase/auth';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { Userinfo } from '../models/userinfo';
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  prdDetails!: FormGroup;
   constructor(private firestore: AngularFirestore) {}
   // Add product to Firestore collection
   addProduct(product: ICategory,category: string) {
@@ -58,5 +60,29 @@ export class ProductService {
         .snapshotChanges()
     );
   }
+
+  // getuser(value:string) {
+  //   return (
+  //     this.firestore
+  //       .collection('/usersdata', ref => ref.where('uid', '==', value))
+  //       // .valueChanges({ idField: 'id' });
+  //       .snapshotChanges()
+  //   );
+  // }
+  // async  getuser(value:string) {
+  //   try {
+  //     const snapshot = await this.firestore
+  //       .collection('/usersdata')
+  //       .ref.where('uid', '==', value)
+  //       .get();
+  //     return snapshot.docs;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
+
+  // update(id: string, data: Userinfo): Promise<void> {
+  //   return this.firestore.collection('/usersdata').doc(id).update(data);
+  // }
 
 }

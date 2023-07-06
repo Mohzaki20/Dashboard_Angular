@@ -1,3 +1,4 @@
+
 <!-- Button trigger modal -->
 <button
   type="button"
@@ -221,7 +222,7 @@
         <th>sellerid</th>
       </tr>
       <!-- <tr *ngFor="let CartProduct of Products"> -->
-      <tr *ngFor="let product of productsList">
+      <tr *ngFor="let product of filterproduct">
         <td>{{ product.id }}</td>
         <td>{{ product.brand }}</td>
         <td><img src="{{ product.images }}" class="PrdImg"></td>
@@ -229,21 +230,21 @@
         <td>{{ product.price }}</td>
         <td>{{ product.SellerId }}</td>
 
-        <fa-icon
+        <!-- <fa-icon
           [icon]="faTrashAlt"
           class="fa-2x"
           style="cursor: pointer"
           (click)="deleteProduct(product)"
-        ></fa-icon>
+        ></fa-icon> -->
         <!-- <button > -->
-          <fa-icon
+          <!-- <fa-icon
             [icon]="faEdit"
             class="fa-2x"
             style="cursor: pointer"
             (click)="editProduct(product)"
             data-bs-target="#exampleModal2"
             data-bs-toggle="modal"
-          ></fa-icon>
+          ></fa-icon> -->
         <!-- </button> -->
       </tr>
     </table>
@@ -307,4 +308,8 @@
       </div>
     </div>
   </div>
-</div>
+</div>  
+
+
+
+

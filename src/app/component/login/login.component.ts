@@ -24,6 +24,7 @@ export class LoginComponent  implements OnInit{
 
 
   login(){
+    
     const userdata=Object.assign(this.loginform.value,{email:this.loginform.value.email})
     this.auth.login(userdata)
 

@@ -25,8 +25,11 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              "src/styles.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+
             ],
             "scripts": [
               "./node_modules/bootstrap/dist/js/bootstrap.min.js"
@@ -54,13 +57,8 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
-                }
-              ]
+              "namedChunks": true
+
             }
           },
           "defaultConfiguration": "production"
@@ -96,16 +94,17 @@
               "src/assets"
             ],
             "styles": [
-
-              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-              "node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "./node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/popper.js/dist/umd/popper.min.js"
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/popper.js/dist/umd/popper.min.js"
 
             ]
           }
@@ -116,16 +115,11 @@
             "version": 2,
             "browserTarget": "dashboard:build:production"
           }
-        },
-        "deploy": {
-          "builder": "@angular/fire:deploy",
-          "options": {
-            "version": 2,
-            "browserTarget": "dashboard:build:production"
-          }
+        }
+
         }
       }
-    }
+
   },
   "cli": {
     "analytics": "f9db62fb-139f-4a37-8f57-7e815e3a2c42"

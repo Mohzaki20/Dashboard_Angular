@@ -9,7 +9,7 @@
 
   <!-- Nav Item - Dashboard -->
   <li class="nav-item active">
-    <a class="nav-link" href="index.html">
+    <a class="nav-link" routerLink="home">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
   </li>
@@ -22,7 +22,7 @@
 
   <!-- Nav Item - Pages Collapse Menu -->
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+    <a class="nav-link collapsed" routerLink="table" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
       aria-controls="collapseTwo">
       <i class="fas fa-fw fa-cog"></i>
       <span>Tables</span>
@@ -40,15 +40,23 @@
 
 
   <!-- Nav Item - Pages Collapse Menu -->
+
+     <li class="nav-item">
+    <a class="nav-link collapsed" routerLink="home2" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+      aria-controls="collapsePages">
+      <i class="fas fa-fw fa-user"></i>
+      <span>user page</span>
+    </a>
+  </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+    <a class="nav-link collapsed" routerLink="login" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
       aria-controls="collapsePages">
       <i class="fas fa-fw fa-user"></i>
       <span>Login</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+    <a class="nav-link collapsed" routerLink="register" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
       aria-controls="collapsePages">
       <i class="fas fa-fw fa-user-lock"></i>
       <span>Register</span>

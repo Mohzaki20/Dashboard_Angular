@@ -47,7 +47,14 @@
 *::after {
   box-sizing: border-box;
 }
-
+.loginlink{
+  color: white;
+  text-decoration: none;
+}
+.loginlink:hover{
+  color: white;
+  text-decoration: none;
+}
 html {
   font-family: sans-serif;
   line-height: 1.15;

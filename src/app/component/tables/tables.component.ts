@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
-// import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
-import { ICategory } from 'src/app/Models/IProduct';
-import { ProductService } from 'src/app/Services/product.service';
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { ICategory } from 'src/app/models/IProduct';
+import { AuthService } from 'src/app/services/auth.service';
+import { ProductService } from 'src/app/services/product.service';
 @Component({
   selector: 'app-tables',
   templateUrl: './tables.component.html',
@@ -11,6 +12,7 @@ import { ProductService } from 'src/app/Services/product.service';
 export class TablesComponent implements OnInit {
   prdDetails!: FormGroup;
   productsList: ICategory[] = [];
+  filterproduct:ICategory[] = [];
   productObj: ICategory = {
     brand: '',
     images: [],
@@ -33,9 +35,11 @@ export class TablesComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private products: ProductService
+    ,private auth:AuthService
   ) {}
   ngOnInit(): void {
     this.getAllProducts(this.category2);
+    this.filterdata();
     this.prdDetails = this.formBuilder.group({
       id: [''],
       brand: [''],
@@ -76,6 +80,16 @@ export class TablesComponent implements OnInit {
       }
     );
   }
+  filterdata(){
+    this.filterproduct=this.productsList.map((e:any)=>{
+      if(e.SellerId==window.localStorage.getItem('token')){
+        console.log(e)
+        return e
+      }
+      return 
+
+    })
+  }
   deleteProduct(product: ICategory) {
     if (window.confirm('Are you sure you want to delete this product?')) {
       this.products.deleteProduct(product,this.category2);
@@ -111,6 +125,8 @@ export class TablesComponent implements OnInit {
   }
   onChange(){
     this.getAllProducts(this.category2);
+    this.filterdata();
+
   }
   // updateProduct(prd:ICategory){
   //   this.prdDetails.controls['id'].setValue(prd.id);

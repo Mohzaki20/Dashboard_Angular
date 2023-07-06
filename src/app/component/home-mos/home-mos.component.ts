@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../Services/auth.service';
+import { Userinfo } from 'src/app/models/userinfo';
+import { AuthService } from 'src/app/services/auth.service';
+import { ProductService } from 'src/app/services/product.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-home-mos',
@@ -11,31 +14,76 @@ export class HomeMosComponent implements OnInit{
    base64: any;
    Img:any;
    daat: any;
-  constructor(private auth:AuthService){}
+   data1!:Userinfo;
+   userdata!:Userinfo;
+  constructor(private auth:AuthService){
+    this.userdata={
+      firstname:'',
+      lastname:'',
+      email:'',
+      password:'',
+      Userimg:this.base64,
+      uid:localStorage.getItem('token')||''
+  }
+  }
   ngOnInit(): void {
 
-      this.auth.getUid();
-      this.userid = localStorage.getItem('uid')||'';
+    this.getData();
+  }
 
 
 
 
 
+
+  // getdata(){
+
+  //  this.auth.getuserdata();
+
+  // }
+  //  getuserdata(){
+  //   this.daat =this.product.getuser(this.userdata.uid).subscribe(snapshot => {
+  //      snapshot.forEach(doc => {
+  //       const data = doc.payload.doc.data();
+  //       // Handle the data here
+  //       // this.data1!= data;
+  //       // console.log(data);
+  //       // console.log(this.data1);
+  //       localStorage.setItem('user',data||)
+  //       return data;
+  //     });
+
+  //   });
+
+  //   console.log(this.daat.doc);
+
+  // }
+  async  getData() {
+    try {
+      const snapshot = await this.auth.getuser(this.userdata.uid);
+      const data = await snapshot.map(doc => doc.data());
+      console.log(data);
+       this.daat=data             // or store data in a variable
+    } catch (error) {
+   console.error(error);
+    }
+    console.log(this.daat);
+   this.userdata=this.daat[0]
+   console.log(this.userdata);
 
   }
 
-  getuser(){
-    this.auth.getUid();
-    this.userid = localStorage.getItem('uid')||'';
-    console.log(this.userid);
+  savechange(){
+    console.log(this.daat[0].id);
 
+    try{
+    this.auth.update(this.daat[0].id||'',this.userdata)
+    }
+    catch(error){
+        console.log(error)
+    }
   }
 
-  getdata(){
-
-   this.auth.getuserdata();
-
-  }
 
   logout(){
     this.auth.logout();

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Userinfo } from '../../Models/userinfo';
-import { AuthService } from '../../Services/auth.service';
+import { Userinfo } from '../../models/userinfo';
+import { AuthService } from '../../services/auth.service';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -10,7 +11,7 @@ import { AuthService } from '../../Services/auth.service';
 export class RegisterComponent implements OnInit {
     registform:FormGroup;
     userinfo:Userinfo={} as Userinfo;
-   imag:any;
+   imag:any='';
 
 
   constructor(private auth:AuthService ,private fb:FormBuilder){
@@ -27,6 +28,8 @@ export class RegisterComponent implements OnInit {
   }
 
   register(){
+
+    this.auth.register(this.registform.value.email,this.registform.value.password)
     this.userinfo={
       firstname:this.registform.value.firstName,
       lastname:this.registform.value.lastName,
@@ -35,14 +38,11 @@ export class RegisterComponent implements OnInit {
       Userimg:this.imag,
       uid:''
     }
-    const all=this.auth.adduserdata(this.userinfo)
+    this.auth.adduserdata(this.userinfo)
     console.log(this.userinfo);
-    console.log(all);
-
-    console.log("hello");
 
 
-    this.auth.register(this.registform.value.email,this.registform.value.password)
+
 
   }
   registwithgoogle(){
