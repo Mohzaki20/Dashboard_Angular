@@ -222,7 +222,7 @@
         <th>sellerid</th>
       </tr>
       <!-- <tr *ngFor="let CartProduct of Products"> -->
-      <tr *ngFor="let product of filterproduct">
+      <tr *ngFor="let product of productsList">
         <td>{{ product.id }}</td>
         <td>{{ product.brand }}</td>
         <td><img src="{{ product.images }}" class="PrdImg"></td>
@@ -230,6 +230,15 @@
         <td>{{ product.price }}</td>
         <td>{{ product.SellerId }}</td>
 
+        <td>
+          <button (click)="deleteProduct(product)">delete</button>
+        </td>
+        <td>
+          <button (click)="editProduct(product)"
+               data-bs-target="#exampleModal2"
+            data-bs-toggle="modal"
+          >update</button>
+        </td>
         <!-- <fa-icon
           [icon]="faTrashAlt"
           class="fa-2x"
@@ -237,7 +246,7 @@
           (click)="deleteProduct(product)"
         ></fa-icon> -->
         <!-- <button > -->
-          <!-- <fa-icon
+           <!-- <fa-icon
             [icon]="faEdit"
             class="fa-2x"
             style="cursor: pointer"
@@ -308,7 +317,7 @@
       </div>
     </div>
   </div>
-</div>  
+</div>
 
 
 

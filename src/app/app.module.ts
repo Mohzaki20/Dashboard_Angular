@@ -1,26 +1,18 @@
 import { NgModule } from '@angular/core';
-import { AngularFireModule } from "@angular/fire/compat";
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TablesComponent } from './component/tables/tables.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faTrashAlt,faEdit } from '@fortawesome/free-solid-svg-icons';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './component/login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { RegisterComponent } from './component/register/register.component';
-import { HomeMosComponent } from './component/home-mos/home-mos.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { HomeComponent } from 'src/app/component/home/home.component';
 import { ChartsComponent } from './component/charts/charts.component';
-import { NavbarComponent } from './component/navbar/navbar.component';
-import { SidebarComponent } from './component/sidebar/sidebar.component';
 import { environmentdevelopment } from 'src/environments/environment.development';
-import { LayoutComponent } from './component/layout/layout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -28,6 +20,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { TablesComponent } from './component/tables/tables.component';
+import { HomeMosComponent } from './component/home-mos/home-mos.component';
+import { LayoutComponent } from './component/layout/layout.component';
+import { LoginComponent } from './component/login/login.component';
+import { NavbarComponent } from './component/navbar/navbar.component';
+import { RegisterComponent } from './component/register/register.component';
+import { SidebarComponent } from './component/sidebar/sidebar.component';
+
 
 
 @NgModule({
@@ -77,7 +79,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatInputModule,
     MatMenuModule,
     BrowserAnimationsModule,
-
+    AngularFireModule.initializeApp(environmentdevelopment.firebase),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

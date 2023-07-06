@@ -39,7 +39,6 @@ export class TablesComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.getAllProducts(this.category2);
-    this.filterdata();
     this.prdDetails = this.formBuilder.group({
       id: [''],
       brand: [''],
@@ -80,16 +79,7 @@ export class TablesComponent implements OnInit {
       }
     );
   }
-  filterdata(){
-    this.filterproduct=this.productsList.map((e:any)=>{
-      if(e.SellerId==window.localStorage.getItem('token')){
-        console.log(e)
-        return e
-      }
-      return 
 
-    })
-  }
   deleteProduct(product: ICategory) {
     if (window.confirm('Are you sure you want to delete this product?')) {
       this.products.deleteProduct(product,this.category2);
@@ -125,7 +115,6 @@ export class TablesComponent implements OnInit {
   }
   onChange(){
     this.getAllProducts(this.category2);
-    this.filterdata();
 
   }
   // updateProduct(prd:ICategory){
