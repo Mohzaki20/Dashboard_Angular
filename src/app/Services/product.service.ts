@@ -1,66 +1,52 @@
-import { ICategory } from '../models/IProduct';
+import { ICategory } from '../models/ICategory';
+
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument,
+} from '@angular/fire/compat/firestore';
 import { FormGroup } from '@angular/forms';
-import { UserInfo } from 'firebase/auth';
-import { collection, onSnapshot, query, where } from 'firebase/firestore';
-import { Userinfo } from '../models/userinfo';
+
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  constructor(private firestore: AngularFirestore) {}
+
+  productsCollection: AngularFirestoreCollection<ICategory>;
+  productDoc: AngularFirestoreDocument<ICategory>;
+  prdDetails!: FormGroup;
+  constructor(private firestore: AngularFirestore) {
+    // this.productsCollection = this.firestore.collection<ICategory>(`/${category}`);
+  }
   // Add product to Firestore collection
-  addProduct(product: ICategory,category: string) {
+  addProduct(product: ICategory, category: string) {
     product.id = this.firestore.createId();
     return this.firestore.collection(`/${category}`).add(product);
   }
 
-  // Update product in Firestore collection
-  updateProduct(product: ICategory,category: string) {
-    return this.firestore.doc(`/${category}/` + product.id).update(product);
-    // return this.firestore.doc('categories').update(product);
-    // return this.firestore
-    //   .collection('/categories')
-    //   .doc(product.id)
-    //   .update(product);
-    // this.firestore
-    //   .collection('products')
-    //   .doc(product.id)
-    //   .get()
-    //   .subscribe((doc) => {
-    //     if (doc.exists) {
-    //       const data = doc.data() as ICategory;
-    //       this.prdDetails.setValue({
-    //         id: data.id,
-    //         price: data.price,
-    //         title: data.title,
-    //         images: data.images,
-    //         sellerID: data.SellerId,
-    //         brand: data.brand,
-    //       });
-    //     }
-    //   });
-    // this.deleteProduct(product);
-    // this.addProduct(product);
-  }
-
-  // Delete product from Firestore collection
-  deleteProduct(product: ICategory,category: string) {
-    return this.firestore.collection(`/${category}`).doc(product.id).delete();
-    // return this.firestore.doc(`/${category}/`+ product.id).delete();
+  // Fetch Single Product Object
+  GetProduct(id: string, category: string): AngularFirestoreDocument<ICategory> {
+    this.productDoc = this.firestore.doc<ICategory>(`/${category}/` + id);
+    return this.productDoc;
   }
 
   // Get all products from Firestore collection
   getProducts(category: string) {
-    return (
-      this.firestore
-        .collection(`/${category}`)
-        // .valueChanges({ idField: 'id' });
-        .snapshotChanges()
-    );
+    return this.firestore.collection(`/${category}`).snapshotChanges();
   }
 
 
+  // Update product in Firestore collection
+  UpdateProduct(product: ICategory, id: string, category: string) {
+    this.productDoc = this.firestore.doc<ICategory>(`/${category}/` + id);
+    this.productDoc.update(product);
+  }
 
+  // Delete product from Firestore collection
+  deleteProduct(product: ICategory, category: string) {
+    return this.firestore.collection(`/${category}`).doc(product.id).delete();
+  }
 }

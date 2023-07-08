@@ -151,10 +151,7 @@
     <li class="nav-item dropdown no-arrow">
       <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        <!-- <span class="mr-2 d-none d-lg-inline text-gray-600 small"[hidden]="userlogcheck">user</span> -->
-        <span class="mr-2 d-none d-lg-inline text-gray-600 small" >{{userdata.firstname}}</span>
 
-        <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
       </a>
 
       <!-- Dropdown - User Information -->
@@ -177,13 +174,29 @@
     </li>
     <li>
       <div class="d-flex m-4">
-      <button  class="btn btn-primary"  [hidden]="userlogcheck">
-       <a routerLink="login" class="loginlink">login </a> </button>
-    </div>
-    </li>
-    <li>
-      <div class="d-flex m-4">
-      <button (click)="logout()" class="btn btn-primary"  [hidden]="!userlogcheck">logout</button>
+
+       <ng-container *ngIf="user$ | async as user; else loginbtn">
+        <button   mat-button>
+          <img
+          width="45"
+          height="45"
+          class="profile-image-toolbar"
+          [src]="user.photoURL ?? 'assets/images.png'"
+        />
+            {{user.displayName}}
+
+          </button>
+          <button (click)="logout()" class="btn btn-primary">
+            logout
+          </button>
+       </ng-container>
+       <ng-template #loginbtn>
+
+       <button  class="btn btn-primary"  routerLink="login">
+        login
+       </button>
+
+       </ng-template>
     </div>
     </li>
 

@@ -1,37 +1,89 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Userinfo } from 'src/app/models/userinfo';
 import { AuthService } from 'src/app/services/auth.service';
-import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { switchMap, tap } from 'rxjs';
+import { HotToastService } from '@ngneat/hot-toast';
+import { ImageUploadService } from 'src/app/services/image-upload.service';
 
+@UntilDestroy()
 @Component({
   selector: 'app-home-mos',
   templateUrl: './home-mos.component.html',
   styleUrls: ['./home-mos.component.css']
 })
 export class HomeMosComponent implements OnInit{
+  user$ = this.userservice.currentUserProfile$;
+
    userid: string=''
    base64: any;
    Img:any;
    daat: any;
    data1!:Userinfo;
    userdata!:Userinfo;
-  constructor(private auth:AuthService){
-    this.userdata={
-      firstname:'',
-      lastname:'',
-      email:'',
-      password:'',
-      Userimg:this.base64,
-      uid:localStorage.getItem('token')||''
-  }
+   profileForm = this.fb.group({
+    uid: [''],
+    email: [''],
+    firstname: [''],
+    lastname: [''],
+    password: [''],
+    Userimg: [''],
+  });
+  constructor(private auth:AuthService,
+             private userservice:UserService,
+             private fb: FormBuilder,
+             private toast: HotToastService,
+             private imageUploadService:ImageUploadService
+             ){
+
   }
   ngOnInit(): void {
-
-    this.getData();
+    this.userservice.currentUserProfile$
+    .pipe(untilDestroyed(this), tap(console.log))
+    .subscribe((user) => {
+      this.profileForm.patchValue({ ...user });
+    });
   }
 
+  uploadFile(event: any, { uid }: Userinfo) {
+    this.imageUploadService
+      .uploadImage(event.target.files[0], `images/profile/${uid}`)
+      .pipe(
+        this.toast.observe({
+          loading: 'Uploading profile image...',
+          success: 'Image uploaded successfully',
+          error: 'There was an error in uploading the image',
+        }),
+        switchMap((photoURL) =>
+          this.userservice.updateUser({
+            uid,
+            photoURL,
+          })
+        )
+      )
+      .subscribe();
+  }
 
+  saveProfile() {
+    const { uid, ...data } = this.profileForm.value;
+
+    if (!uid) {
+      return;
+    }
+
+    this.userservice
+      .updateUser({ uid, ...data })
+      .pipe(
+        this.toast.observe({
+          loading: 'Saving profile data...',
+          success: 'Profile updated successfully',
+          error: 'There was an error in updating the profile',
+        })
+      )
+      .subscribe();
+  }
 
 
 
@@ -58,46 +110,15 @@ export class HomeMosComponent implements OnInit{
   //   console.log(this.daat.doc);
 
   // }
-  async  getData() {
-    try {
-      const snapshot = await this.auth.getuser(this.userdata.uid);
-      const data = await snapshot.map(doc => doc.data());
-      console.log(data);
-       this.daat=data             // or store data in a variable
-    } catch (error) {
-   console.error(error);
-    }
-    console.log(this.daat);
-   this.userdata=this.daat[0]
-   console.log(this.userdata);
-
-  }
-
-  savechange(){
-    console.log(this.daat[0].id);
-
-    try{
-    this.auth.update(this.daat[0].id||'',this.userdata)
-    }
-    catch(error){
-        console.log(error)
-    }
-  }
 
 
-  logout(){
-    this.auth.logout();
-  }
 
-  getImagepath(event:any){
-    const file = event.target.files[0];
-    const reader=new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () =>{
-      this.base64=reader.result;
-      this.Img=this.base64;
-    }
-  }
+
+  // logout(){
+  //   this.auth.logout();
+  // }
+
+
 
 
 }

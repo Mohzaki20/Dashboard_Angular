@@ -29,8 +29,15 @@ import { LoginComponent } from './component/login/login.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { RegisterComponent } from './component/register/register.component';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
+// import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-
+// import { initializeApp } from "firebase/app";
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import {MatSortModule} from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
+import { getStorage, provideStorage } from '@angular/fire/storage';
+import { HotToastModule } from '@ngneat/hot-toast';
 
 @NgModule({
   declarations: [
@@ -50,6 +57,9 @@ import { SidebarComponent } from './component/sidebar/sidebar.component';
 
 
 
+
+
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -57,8 +67,6 @@ import { SidebarComponent } from './component/sidebar/sidebar.component';
     FormsModule,
     ReactiveFormsModule,
     // provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()),
     AngularFireModule.initializeApp(environmentdevelopment.firebase),
     SweetAlert2Module.forRoot(),
     SweetAlert2Module,
@@ -67,9 +75,10 @@ import { SidebarComponent } from './component/sidebar/sidebar.component';
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule ,
-
+    provideFirebaseApp(() => initializeApp(environmentdevelopment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
     AngularFireModule.initializeApp(environmentdevelopment.firebase),
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -79,15 +88,23 @@ import { SidebarComponent } from './component/sidebar/sidebar.component';
     MatInputModule,
     MatMenuModule,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(environmentdevelopment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    FontAwesomeModule,
+    ReactiveFormsModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatTableModule,
+    BrowserAnimationsModule,
+    HotToastModule,
+
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(library: FaIconLibrary){
+  constructor(library: FaIconLibrary) {
     library.addIcons(faTrashAlt);
     library.addIcons(faEdit);
   }
   }
+

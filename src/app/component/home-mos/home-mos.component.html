@@ -3,20 +3,21 @@
 
 >
   <h1>Update Profile</h1>
-  <div class="profile-image">
+  <div class="profile-image"  *ngIf="user$ | async as user">
     <img
-    [src]="base64"
-      width="120"
-      height="120"
-      class="margin-top mat-elevation-z1 m-2"
-    />
+    width="120"
+    height="120"
+    class="margin-top mat-elevation-z1"
+    [src]="user.photoURL ?? 'assets/images.png'"
+  />
     <button mat-mini-fab (click)="inputField.click()">
       <mat-icon>edit</mat-icon>
     </button>
-  </div>
-  <input #inputField hidden type="file"   class="form-control" id="Img"  name="img" (change)="getImagepath($event)"  style="width: 100px;" />
+    <input #inputField hidden type="file" (change)="uploadFile($event, user)" />
 
-  <form class="margin-top" >
+  </div>
+
+  <form class="margin-top" [formGroup]="profileForm" (ngSubmit)="saveProfile()" >
     <div class="row flex-nowrap">
       <div class="col-3">
       first name:
@@ -25,7 +26,8 @@
       <mat-form-field>
         <input
           type="text"
-          [(ngModel)]="userdata.firstname" [ngModelOptions]="{standalone: true}"
+          formControlName="firstname"
+
           matInput
         />
       </mat-form-field>
@@ -38,8 +40,8 @@
       <mat-form-field>
         <input
           type="text"
-          [(ngModel)]="userdata.lastname"
-          [ngModelOptions]="{standalone: true}"
+          formControlName="lastname"
+
           matInput
         />
       </mat-form-field>
@@ -54,9 +56,8 @@
         <input
           type="text"
           matInput
-          [(ngModel)]="userdata.email"
-          [ngModelOptions]="{standalone: true}"
-          disabled
+          formControlName="email"
+          [disabled]
         />
       </mat-form-field>
       </div>
@@ -68,8 +69,7 @@
       <mat-form-field>
         <input
           type="password"
-          [(ngModel)]="userdata.password"
-          [ngModelOptions]="{standalone: true}"
+          formControlName="password"
           matInput
         />
       </mat-form-field>
@@ -83,10 +83,9 @@
       </mat-form-field> -->
 
 <br>
-    <button type="submit" (click)="savechange()"  class="margin-top" mat-raised-button color="primary">
+    <button type="submit" (click)="saveProfile()"  class="margin-top" mat-raised-button color="primary">
       Save
     </button>
-    <!-- <button (click)="saveTutorial()" class="btn btn-success">Submit</button> -->
 
   </form>
 </div>

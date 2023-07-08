@@ -1,5 +1,4 @@
 export interface ICategory {
-    // Category:string[];
     id?: string;
     brand: string;
     images:string[];

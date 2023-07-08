@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-layout',
@@ -6,5 +9,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./layout.component.css']
 })
 export class LayoutComponent {
+  user$ = this.userservice.currentUserProfile$;
 
-}
+  constructor(public  auth:AuthService,
+       private userservice:UserService,
+       private router:Router
+    ){}
+
+  }

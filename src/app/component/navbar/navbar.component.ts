@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Userinfo } from 'src/app/models/userinfo';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,51 +10,18 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./navbar.component.css']
 })
  export  class  NavbarComponent implements OnInit {
+  user$ = this.userservice.currentUserProfile$;
 
-  userdata:Userinfo;
-  daat!:any;
-  userlogcheck:boolean;
-  constructor(private auth:AuthService){
-    this.userlogcheck=this.auth.userstate;
-    this.userdata={
-      firstname:'user',
-      lastname:'',
-      email:'',
-      password:'',
-      Userimg:'',
-      uid:localStorage.getItem('token')||''
+  constructor(public  auth:AuthService,
+       private userservice:UserService,
+       private router:Router
+    ){
+
   }
-  }
-  ngOnInit(): void {
-    this.getData();
-
-    this.auth.userstatuschange().subscribe(status=>{
-      this.userlogcheck=status;
-      console.log(this.userlogcheck);
-    }
-  )
-
-
-}
-
-
-
- async  getData() {
-   try {
-     const snapshot = await this.auth.getuser(this.userdata.uid);
-     const data = await snapshot.map(doc => doc.data());
-     console.log(data);
-      this.daat=data             // or store data in a variable
-   } catch (error) {
-  console.error(error);
-   }
-   console.log(this.daat);
-  this.userdata=this.daat[0]
-  console.log(this.userdata);
-
- }
+  ngOnInit(): void {}
 
   logout(){
     this.auth.logout();
+    this.router.navigate(['']);
   }
 }

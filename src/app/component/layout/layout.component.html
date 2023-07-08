@@ -1,8 +1,28 @@
-<div class="dash">
-    <app-sidebar class="sidebar-dash"></app-sidebar>
-    <div class="content">
-      <app-navbar class=""></app-navbar>
-      <router-outlet></router-outlet>
 
-    </div>
-</div>      
+<div class="cont">
+  <img src="assets/amzonland.jpg" width="400px">
+  <div class="welcomemsg">
+  Welcome to the Amazon Dashbord for seller!
+  </div>
+
+ <ng-container *ngIf="user$ | async as user;else landing ">
+      <div class="nameofuser">
+       Mr. {{user.displayName}}
+      </div>
+
+</ng-container>
+<ng-template #landing>
+  <div>
+    <h3>Click Login to login to our system</h3>
+    <h3>OR  Sign Up!  for create Account  </h3>
+    <button class="p-4"  mat-raised-button color="primary" routerLink="/register">
+        Sign Up!
+    </button>
+
+    <button class="ms-5 p-4" mat-raised-button color="primary" routerLink="/login">
+        Login
+  </button>
+  </div>
+</ng-template>
+
+</div>

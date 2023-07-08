@@ -55,6 +55,10 @@
   color: white;
   text-decoration: none;
 }
+.profile-image-toolbar {
+  border-radius: 100%;
+  margin-right: 8px;
+}
 html {
   font-family: sans-serif;
   line-height: 1.15;
