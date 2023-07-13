@@ -26,23 +26,23 @@ export class ProductService {
 
   // Fetch Single Product Object
   GetProduct(id: string, category: string): AngularFirestoreDocument<ICategory> {
-    this.productDoc = this.firestore.doc<ICategory>(`/${category}/` + id);
+    this.productDoc = this.firestore.doc<ICategory>(`${category}/` + id);
     return this.productDoc;
   }
 
   // Get all products from Firestore collection
   getProducts(category: string) {
-    return this.firestore.collection(`/${category}`).snapshotChanges();
+    return this.firestore.collection(`${category}`).snapshotChanges();
   }
 
   // Update product in Firestore collection
   UpdateProduct(product: ICategory, id: string, category: string) {
-    this.productDoc = this.firestore.doc<ICategory>(`/${category}/` + id);
+    this.productDoc = this.firestore.doc<ICategory>(`${category}/` + id);
     this.productDoc.update(product);
   }
 
   // Delete product from Firestore collection
   deleteProduct(product: ICategory, category: string) {
-    return this.firestore.collection(`/${category}`).doc(product.id).delete();
+    return this.firestore.collection(`${category}`).doc(product.id).delete();
   }
 }

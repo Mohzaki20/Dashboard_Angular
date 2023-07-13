@@ -24,10 +24,13 @@ export class TablesComponent implements OnInit {
     'id',
     'brand',
     'images',
-    'SellerId',
     'price',
     'title',
-    'actions'
+    'description',
+    'stock',
+    'rating',
+    'thumbnail',
+    'actions',
   ];
   dataSource: MatTableDataSource<ICategory>;
 
@@ -41,53 +44,49 @@ export class TablesComponent implements OnInit {
     brand: '',
     images: [],
     price: 0,
-    SellerId: '',
+    // SellerId: '',
+    description:'',
     title: '',
+    rating:0,
+    thumbnail:'',
+    stock:0
   };
   updatedObj!: ICategory;
-  id: string = '';
-  brand: string = '';
+  id: string ;
+  brand: string ;
   images: string[] = [];
-  price: number = 0;
-  SellerId: string = '';
-  title: string = '';
+  price: number ;
+  // SellerId: string = '';
+  title: string ;
+  description:string;
+  rating:number;
+  thumbnail:string;
+  stock:number;
   faTrashAlt = faTrashAlt;
   faEdit = faEdit;
-  category: string = '';
-  category2: string = '';
+  category: string;
+  category2: string;
 
   constructor(
     private formBuilder: FormBuilder,
     private products: ProductService,
-    // private location: Location,
     private _liveAnnouncer: LiveAnnouncer
   ) {}
   ngOnInit(): void {
-    this.getAllProducts(this.category2);
-    // this.prdDetails = this.formBuilder.group({
-    //   id: [''],
-    //   brand: [''],
-    //   images: [''],
-    //   price: [''],
-    //   SellerId: [''],
-    //   title: [''],
-    // });
-    // this.productId = this.actRoute.snapshot.paramMap.get('id');
-    this.editForm = this.formBuilder.group({
-      id: [this.productObj.id],
-      brand: [this.productObj.brand],
-      images: [this.productObj.images],
-      price: [this.productObj.price],
-      SellerId: [this.productObj.SellerId],
-      title: [this.productObj.title],
-    });
+    if (this.category2) {
+      this.getAllProducts(this.category2);
+    }
     this.editForm = new FormGroup({
       id: new FormControl(''),
       brand: new FormControl(''),
       images: new FormControl([]),
       price: new FormControl(0),
-      SellerId: new FormControl(''),
+      // SellerId: new FormControl(''),
       title: new FormControl(''),
+      description:new FormControl(''),
+      rating:new FormControl(0),
+      thumbnail:new FormControl(''),
+      stock:new FormControl(0)
     });
   }
   resetForm() {
@@ -95,7 +94,11 @@ export class TablesComponent implements OnInit {
     this.id = '';
     this.images = [];
     this.price = 0;
-    this.SellerId = '';
+    // this.SellerId = '';
+    this.description='';
+    this.rating=0;
+    this.thumbnail='';
+    this.stock=0;
     this.title = '';
   }
 
@@ -110,6 +113,7 @@ export class TablesComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.productsList);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        console.log(categories, this.category2, this.productsList);
       },
       (err) => {
         return alert('error');
@@ -127,7 +131,11 @@ export class TablesComponent implements OnInit {
       this.id == '' ||
       this.images == null ||
       this.price == 0 ||
-      this.SellerId == '' ||
+      // this.SellerId == '' ||
+      this.description==''||
+      this.rating==0||
+      this.thumbnail==''||
+      this.stock==0||
       this.title == ''
     ) {
       alert('fill all input fields');
@@ -136,42 +144,32 @@ export class TablesComponent implements OnInit {
       this.productObj.price = this.price;
       this.productObj.id = '';
       this.productObj.images = this.images;
-      this.productObj.price = this.price;
-      this.productObj.SellerId = this.SellerId;
+      // this.productObj.SellerId = this.SellerId;
       this.productObj.title = this.title;
+      this.productObj.description= this.description;
+      this.productObj.rating=this.rating;
+      this.productObj.thumbnail=this.thumbnail;
+      this.productObj.stock=this.stock;
       this.products.addProduct(this.productObj, this.category);
-      // if (this.id) {
-      //   this.productObj.id = this.id;
-      //   this.products.updateProduct(this.productObj,this.category);
-      // } else {
-      //   this.products.addProduct(this.productObj,this.category);
-      // }
       this.resetForm();
     }
   }
   onChange() {
     this.getAllProducts(this.category2);
   }
-  // updateProduct(prd:ICategory){
-  //   this.prdDetails.controls['id'].setValue(prd.id);
-  //   this.prdDetails.controls['brand'].setValue(prd.brand);
-  //   this.prdDetails.controls['images'].setValue(prd.images);
-  //   this.prdDetails.controls['price'].setValue(prd.price);
-  //   this.prdDetails.controls['SellerId'].setValue(prd.SellerId);
-  //   this.prdDetails.controls['title'].setValue(prd.title);
-  //   this.products.updateProduct(this.productObj);
-  // }
-  // updateProduct(product: ICategory) {
-  //   this.products.updateProduct(product);
-  // }
-  setData() {
+  setData(id: string) {
+    console.log(this.editForm);
+    console.log(this.productObj);
+    console.log(id, this.category2);
+
     this.updateData();
     this.products
-      .GetProduct(this.productId, this.category)
+      .GetProduct(id, this.category2)
       .valueChanges()
       .subscribe((data) => {
         this.editForm.setValue(data);
       });
+    this.productId = id;
   }
 
   updateData() {
@@ -181,46 +179,23 @@ export class TablesComponent implements OnInit {
       price: ['', [Validators.required]],
       title: ['', [Validators.required]],
       images: ['', [Validators.required]],
-      SellerId: ['', [Validators.required]],
+      // SellerId: ['', [Validators.required]],
+      description:['', [Validators.required]],
+      rating:['', [Validators.required]],
+      thumbnail:['', [Validators.required]],
+      stock:['', [Validators.required]],
     });
   }
 
-  updateproduct(product: ICategory) {
-    // this.deleteProduct(this.productObj);
-    // this.addProduct();
-    console.log(product);
-    this.products.UpdateProduct(this.updatedObj, this.id, this.category);
-  }
-
   editProduct() {
-    // console.log('Editing product:', product);
-    // console.log(this.editForm);
-    // this.updatedObj = product;
-
-    // this.editForm.setValue({
-    //   id: product.id,
-    //   brand: product.brand,
-    //   images: product.images,
-    //   price: product.price,
-    //   SellerId: product.SellerId,
-    //   title: product.title,
-    // });
-    console.log(this.editForm);
+    console.log('edit', this.editForm);
 
     this.products.UpdateProduct(
       this.editForm.value,
       this.productId,
-      this.category
+      this.category2
     );
     alert(this.editForm.controls['title'].value + ' updated successfully');
+    this.productId = '';
   }
-  // announceSortChange(sortState: Sort) {
-  //   // This example uses English messages. If your application supports
-  //   // multiple language, you would internationalize these strings.
-  //   // Furthermore, you can customize the message to add additional
-  //   // details about the values being sorted.
-  //   if (sortState.direction) {
-  //     this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-  //   }
-  // }
 }
