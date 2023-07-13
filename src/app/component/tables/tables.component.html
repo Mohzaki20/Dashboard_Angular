@@ -95,17 +95,45 @@
         </div>
       </div>
 
-      <!-- Seller id input -->
+      <!-- stock input -->
       <div class="input-group">
         <div class="form-floating">
           <input
             type="text"
             class="form-control"
             id="floatingInputGroup2"
-            placeholder="Seller id"
-            [(ngModel)]="SellerId"
+            placeholder="stock"
+            [(ngModel)]="stock"
           />
-          <label for="floatingInputGroup2">Seller id</label>
+          <label for="floatingInputGroup2">stock</label>
+        </div>
+      </div>
+
+      <!-- rating input -->
+      <div class="input-group">
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="floatingInputGroup2"
+            placeholder="rating"
+            [(ngModel)]="rating"
+          />
+          <label for="floatingInputGroup2">rating</label>
+        </div>
+      </div>
+
+      <!-- description input -->
+      <div class="input-group">
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="floatingInputGroup2"
+            placeholder="description"
+            [(ngModel)]="description"
+          />
+          <label for="floatingInputGroup2">description</label>
         </div>
       </div>
 
@@ -120,6 +148,20 @@
             [(ngModel)]="title"
           />
           <label for="floatingInputGroup2">Title</label>
+        </div>
+      </div>
+
+      <!-- thumbnail input -->
+      <div class="input-group">
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="floatingInputGroup2"
+            placeholder="thumbnail"
+            [(ngModel)]="thumbnail"
+          />
+          <label for="floatingInputGroup2">thumbnail</label>
         </div>
       </div>
       <button class="btn btn-primary AddBtn" (click)="addProduct()">add</button>
@@ -188,8 +230,12 @@
   </div> -->
   <div>
     <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" matSort
-      class="mat-elevation-z8">
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        matSort
+        class="mat-elevation-z8"
+      >
         <!-- id Column -->
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>id</th>
@@ -210,14 +256,8 @@
           </td>
         </ng-container>
 
-        <!-- SellerId Column -->
-        <ng-container matColumnDef="SellerId">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>SellerId</th>
-          <td mat-cell *matCellDef="let element">{{ element.SellerId }}</td>
-        </ng-container>
-
         <!-- price Column -->
-        <ng-container matColumnDef="price" >
+        <ng-container matColumnDef="price">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>price</th>
           <td mat-cell *matCellDef="let element">{{ element.price }}</td>
         </ng-container>
@@ -228,6 +268,25 @@
           <td mat-cell *matCellDef="let element">{{ element.title }}</td>
         </ng-container>
 
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>description</th>
+          <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="rating">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>rating</th>
+          <td mat-cell *matCellDef="let element">{{ element.rating }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="stock">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>stock</th>
+          <td mat-cell *matCellDef="let element">{{ element.stock }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="thumbnail">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>thumbnail</th>
+          <td mat-cell *matCellDef="let element">{{ element.thumbnail }}</td>
+        </ng-container>
         <!-- actions Column -->
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Control</th>
@@ -243,7 +302,7 @@
               [icon]="faEdit"
               class="fa-2x"
               style="cursor: pointer"
-              (click)="setData(element.id,category2)"
+              (click)="setData(element.id)"
               data-bs-target="#exampleModal2"
               data-bs-toggle="modal"
             ></fa-icon>
@@ -277,7 +336,7 @@
             Updating product
           </h1>
         </div>
-        <form [formGroup]="editForm">
+        <form [formGroup]="editForm" (ngSubmit)="editProduct()">
           <select
             class="form-select"
             id="floatingSelect"
@@ -289,13 +348,6 @@
             <option value="Jewllery">Jewllery</option>
             <option value="Electronics">Electronics</option>
           </select>
-          <label for="id">ID</label>
-          <input
-            type="text"
-            name="id"
-            formControlName="id"
-            class="form-control"
-          />
           <label for="brand">brand</label>
           <input
             type="text"
@@ -317,13 +369,6 @@
             formControlName="price"
             class="form-control"
           />
-          <label for="SellerId">SellerId</label>
-          <input
-            type="text"
-            name="SellerId"
-            formControlName="SellerId"
-            class="form-control"
-          />
           <label for="images">images</label>
           <input
             type="text"
@@ -331,13 +376,28 @@
             formControlName="images"
             class="form-control"
           />
-          <button
-            type="button"
-            (click)="editProduct()"
-            class="btn btn-primary AddBtn"
-          >
-            update
-          </button>
+          <label for="images">description</label>
+          <input
+            type="text"
+            name="description"
+            formControlName="description"
+            class="form-control"
+          />
+          <label for="images">stock</label>
+          <input
+            type="text"
+            name="stock"
+            formControlName="stock"
+            class="form-control"
+          />
+          <label for="images">thummbnail</label>
+          <input
+            type="text"
+            name="thumbnail"
+            formControlName="thumbnail"
+            class="form-control"
+          />
+          <button type="submit" class="btn btn-primary AddBtn">update</button>
         </form>
       </div>
     </div>
