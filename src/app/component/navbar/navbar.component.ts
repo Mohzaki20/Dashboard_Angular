@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Userinfo } from 'src/app/models/userinfo';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
@@ -14,7 +15,9 @@ import { UserService } from 'src/app/services/user.service';
 
   constructor(public  auth:AuthService,
        private userservice:UserService,
-       private router:Router
+       private router:Router,
+       private toast: ToastrService,
+
     ){
 
   }
@@ -22,6 +25,7 @@ import { UserService } from 'src/app/services/user.service';
 
   logout(){
     this.auth.logout();
+    this.toast.success('you have logged out')
     this.router.navigate(['']);
   }
 }

@@ -13,7 +13,7 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { HomeComponent } from 'src/app/component/home/home.component';
 import { ChartsComponent } from './component/charts/charts.component';
 import { environmentdevelopment } from 'src/environments/environment.development';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -38,6 +38,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { HotToastModule } from '@ngneat/hot-toast';
+import { ToastrModule, provideToastr } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,7 @@ import { HotToastModule } from '@ngneat/hot-toast';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    // provideFirebaseApp(() => initializeApp(environment.firebase)),
+     provideFirebaseApp(() => initializeApp(environmentdevelopment.firebase)),
     AngularFireModule.initializeApp(environmentdevelopment.firebase),
     SweetAlert2Module.forRoot(),
     SweetAlert2Module,
@@ -95,10 +96,12 @@ import { HotToastModule } from '@ngneat/hot-toast';
     MatPaginatorModule,
     MatTableModule,
     BrowserAnimationsModule,
-    HotToastModule,
-
+    ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    provideAnimations(), // required animations providers
+    provideToastr(),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

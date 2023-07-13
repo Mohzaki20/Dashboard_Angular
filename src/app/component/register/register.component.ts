@@ -6,7 +6,7 @@ import { switchMap } from 'rxjs/operators';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-
+import { ToastrService } from 'ngx-toastr';
 export function passwordsMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const password = control.get('password')?.value;
@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(private auth: AuthService,
              private fb:FormBuilder ,
-             private toast: HotToastService,
+             private toast: ToastrService,
              private router:Router,
              private userservice:UserService
   ) {
@@ -78,21 +78,23 @@ export class RegisterComponent implements OnInit {
     const { firstname,lastname, email, password } = this.registform.value;
     console.log(email +" "+ password)
 
-    if (!this.registform.valid || !firstname||lastname || !password || !email) {
-      return;
-    }
+    // if (!this.registform.valid || !firstname||lastname || !password || !email) {
+    //   return;
+    // }
     console.log(email +" "+ password)
     this.auth
       .signUp(email, password)
       .pipe(
         switchMap(({ user: { uid } }) =>
         this.userservice.addUser({uid , email , firstname ,lastname,password, displayName:firstname })
-        ),
-        this.toast.observe({
-          success: 'Congrats! You are all signed up',
-          loading: 'Signing up...',
-          error: ({ message }) => `${message}`,
-        })
+        )
+        // ,
+        // this.toast.observe({
+        //   success: 'Congrats! You are all signed up',
+        //   loading: 'Signing up...',
+        //   error: ({ message }) => `${message}`,
+        // }
+        // )
       )
       .subscribe(() => {
         this.router.navigate(['']);
