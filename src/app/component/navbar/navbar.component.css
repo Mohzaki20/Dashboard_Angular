@@ -4123,6 +4123,16 @@ input[type="button"].btn-block {
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 1rem;
+  transition:  background-color 1s;
+}
+.navbar:hover{
+  background-color: white;
+}
+.navbar .username{
+  color:rgb(245, 242, 242)
+}
+.navbar:hover .username{
+  color:black
 }
 
 .navbar .container,

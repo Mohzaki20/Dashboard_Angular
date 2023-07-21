@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, NonNullableFormBuilder, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Userinfo } from '../../models/userinfo';
 import { AuthService } from '../../services/auth.service';
 import { switchMap } from 'rxjs/operators';
-import { HotToastService } from '@ngneat/hot-toast';
+// import { HotToastService } from '@ngneat/hot-toast';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { Userinfo } from 'src/app/Models/userinfo';
 export function passwordsMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const password = control.get('password')?.value;
@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
       lastname: ['', [Validators.required, Validators.pattern('[a-zA-Z]{3,}')]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      repeatpassword: ['', [Validators.required]],
+      repeatpassword: ['', [Validators.required,Validators.minLength(6)]],
 
     },
       {

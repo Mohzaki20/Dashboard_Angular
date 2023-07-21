@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Userinfo } from '../models/userinfo';
+import { Userinfo } from 'src/app/Models/userinfo';
 import { AngularFirestore} from '@angular/fire/compat/firestore';
 import { AuthService } from './auth.service';
 import { Observable, from, of, switchMap } from 'rxjs';

@@ -5,21 +5,27 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {
-  FormControl,
-
-  Validators,
+  FormControl,Validators,
 } from '@angular/forms';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-
+import { UserService } from 'src/app/services/user.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { switchMap, tap } from 'rxjs';
+import { ImageUploadService } from 'src/app/services/image-upload.service';
+import { Userinfo } from 'src/app/Models/userinfo';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { uid } from 'chart.js/dist/helpers/helpers.core';
 @Component({
   selector: 'app-tables',
   templateUrl: './tables.component.html',
   styleUrls: ['./tables.component.css'],
 })
 export class TablesComponent implements OnInit {
+  user$ = this.userservice.currentUserProfile$;
+  arr: string[] = [];
   displayedColumns: string[] = [
     'id',
     'brand',
@@ -29,6 +35,7 @@ export class TablesComponent implements OnInit {
     'description',
     'stock',
     'rating',
+    'color',
     'thumbnail',
     'actions',
   ];
@@ -45,7 +52,7 @@ export class TablesComponent implements OnInit {
     brand: '',
     images: [],
     price: 0,
-    // SellerId: '',
+    SellerId: '',
     description:'',
     title: '',
     rating:0,
@@ -57,7 +64,7 @@ export class TablesComponent implements OnInit {
   brand: string ;
   images: string[] = [];
   price: number ;
-  // SellerId: string = '';
+  SellerId: string = '';
   title: string ;
   description:string;
   rating:number;
@@ -67,14 +74,19 @@ export class TablesComponent implements OnInit {
   faEdit = faEdit;
   category: string;
   category2: string;
-
+  color:string;
+  image:string;
+  useruid:string;
   constructor(
     private formBuilder: FormBuilder,
-
     private products: ProductService,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    private imageUploadService:ImageUploadService,
+    private userservice:UserService,
+    private firestore: AngularFirestore
   ) {}
   ngOnInit(): void {
+    this.user$.subscribe(user => this.useruid=user.uid)
     if (this.category2) {
       this.getAllProducts(this.category2);
     }
@@ -83,29 +95,56 @@ export class TablesComponent implements OnInit {
       brand: new FormControl(''),
       images: new FormControl([]),
       price: new FormControl(0),
-      // SellerId: new FormControl(''),
+      SellerId: new FormControl(''),
       title: new FormControl(''),
       description:new FormControl(''),
       rating:new FormControl(0),
       thumbnail:new FormControl(''),
-      stock:new FormControl(0)
+      stock:new FormControl(0),
+      color:new FormControl('')
+
     });
+    console.log(this.useruid);
+
   }
   resetForm() {
     this.brand = '';
     this.id = '';
+    this.image='';
     this.images = [];
     this.price = 0;
-    // this.SellerId = '';
+    this.SellerId = '';
     this.description='';
     this.rating=0;
     this.thumbnail='';
     this.stock=0;
     this.title = '';
   }
+  uploadFile(event: any,i: number) {
+    console.log(this.useruid);
+
+    var id = this.firestore.createId();
+    this.arr[i]=id
+    this.imageUploadService
+      .uploadImage(event.target.files[0], `images/product/${id}`)
+      .pipe(
+        switchMap((photoURL) =>
+         this.images[i]=photoURL,
+        )
+      )
+      .subscribe();
+
+  }
+
+  deleteImage(i:number){
+    this.imageUploadService.deleteImage(`images/product/${this.arr[i]}`)
+    this.images[i]=null
+  }
 
   getAllProducts(categories: string) {
-    this.products.getProducts(categories).subscribe(
+    this.SellerId=this.useruid
+
+    this.products.getProducts(categories,this.SellerId).subscribe(
       (res) => {
         this.productsList = res.map((e: any) => {
           const data = e.payload.doc.data();
@@ -129,6 +168,7 @@ export class TablesComponent implements OnInit {
     }
   }
   addProduct() {
+    this.SellerId=this.useruid
     if (
       this.brand == '' ||
       this.id == '' ||
@@ -147,12 +187,13 @@ export class TablesComponent implements OnInit {
       this.productObj.price = this.price;
       this.productObj.id = '';
       this.productObj.images = this.images;
-      // this.productObj.SellerId = this.SellerId;
+      this.productObj.SellerId = this.SellerId;
       this.productObj.title = this.title;
       this.productObj.description= this.description;
       this.productObj.rating=this.rating;
       this.productObj.thumbnail=this.thumbnail;
       this.productObj.stock=this.stock;
+      this.productObj.color= this.color;
       this.products.addProduct(this.productObj, this.category);
       this.resetForm();
     }
@@ -171,10 +212,8 @@ export class TablesComponent implements OnInit {
       .GetProduct(id, this.category2)
       .valueChanges()
       .subscribe((data) => {
-        console.log(data)
-
-        // this.editForm.setValue(data);
-        // console.log(data)
+        this.editForm.setValue(data);
+        this.editForm.value.images=data.images
       });
     this.productId = id;
   }
@@ -185,8 +224,8 @@ export class TablesComponent implements OnInit {
       brand: ['', [Validators.required]],
       price: ['', [Validators.required]],
       title: ['', [Validators.required]],
-      images: ['', [Validators.required]],
-      // SellerId: ['', [Validators.required]],
+      images: [[], [Validators.required]],
+      SellerId: ['', [Validators.required]],
       description:['', [Validators.required]],
       rating:['', [Validators.required]],
       thumbnail:['', [Validators.required]],

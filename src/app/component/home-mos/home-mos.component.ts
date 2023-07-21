@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Userinfo } from 'src/app/models/userinfo';
+import { Userinfo } from '../../Models/userinfo';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { switchMap, tap } from 'rxjs';
-import { HotToastService } from '@ngneat/hot-toast';
 import { ImageUploadService } from 'src/app/services/image-upload.service';
+import { ToastrService } from 'ngx-toastr';
 
 @UntilDestroy()
 @Component({
@@ -25,16 +25,18 @@ export class HomeMosComponent implements OnInit{
    userdata!:Userinfo;
    profileForm = this.fb.group({
     uid: [''],
-    email: [''],
+    email: [{value: '', disabled: true}],
     firstname: [''],
     lastname: [''],
-    password: [''],
+
+    password: [{value: '', disabled: true}],
     Userimg: [''],
+    displayName: ['']
   });
   constructor(private auth:AuthService,
              private userservice:UserService,
              private fb: FormBuilder,
-             private toast: HotToastService,
+             private toast:ToastrService ,
              private imageUploadService:ImageUploadService
              ){
 
@@ -51,11 +53,15 @@ export class HomeMosComponent implements OnInit{
     this.imageUploadService
       .uploadImage(event.target.files[0], `images/profile/${uid}`)
       .pipe(
-        this.toast.observe({
-          loading: 'Uploading profile image...',
-          success: 'Image uploaded successfully',
-          error: 'There was an error in uploading the image',
-        }),
+        // this.toast.observe({
+        //   loading: 'Uploading profile image...',
+        //   success: 'Image uploaded successfully',
+        //   error: 'There was an error in uploading the image',
+        // }),
+        // this.toast.success("success"),
+        // this.toast.error("feild"),
+
+
         switchMap((photoURL) =>
           this.userservice.updateUser({
             uid,
@@ -76,11 +82,12 @@ export class HomeMosComponent implements OnInit{
     this.userservice
       .updateUser({ uid, ...data })
       .pipe(
-        this.toast.observe({
-          loading: 'Saving profile data...',
-          success: 'Profile updated successfully',
-          error: 'There was an error in updating the profile',
-        })
+        // this.toast.success('ssssssss','ddd')
+        // this.toast.observe({
+        //   loading: 'Saving profile data...',
+        //   success: 'Profile updated successfully',
+        //   error: 'There was an error in updating the profile',
+        // })
       )
       .subscribe();
   }

@@ -20,7 +20,7 @@ form{
 }
 .AddBtn{
   margin: 3%;
-  margin-left: 80%;
+
 }
 .categorySelectorViewLabel{
   margin-top: 3%;
@@ -38,7 +38,7 @@ form{
 }
 
 .mat-mdc-form-field {
-  font-size: 14px;
+  font-size:1.5vw;
   width: 100%;
 }
 

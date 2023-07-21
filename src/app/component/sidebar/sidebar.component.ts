@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Userinfo } from 'src/app/models/userinfo';
 import { ProductService } from 'src/app/services/product.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,5 +8,10 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
+  user$ = this.userservice.currentUserProfile$;
+  constructor(
+        private userservice:UserService
+    ){}
+
 
 }

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+<nav class="navbar navbar-expand navbar-light  topbar mb-0 static-top shadow">
 
   <!-- Sidebar Toggle (Topbar) -->
   <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -176,14 +176,14 @@
       <div class="d-flex m-4">
 
        <ng-container *ngIf="user$ | async as user; else loginbtn">
-        <button   mat-button>
+        <button  routerLink="profile" class="username"  mat-button style=" font-weight: bold;">
           <img
           width="45"
           height="45"
           class="profile-image-toolbar"
           [src]="user.photoURL ?? 'assets/images.png'"
         />
-            {{user.firstname}}
+            {{user.displayName}}
 
           </button>
           <button (click)="logout()" class="btn btn-primary">

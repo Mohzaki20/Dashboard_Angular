@@ -1,5 +1,5 @@
 <div
-  class="form-container mat-elevation-z5 text-center"
+  class="form-container mat-elevation-z5 text-center mt-5"
 
 >
   <h1>Update Profile</h1>
@@ -46,7 +46,19 @@
         />
       </mat-form-field>
     </div>
+    <div class="row flex-nowrap">
+      <div class="col-3">
 
+      name:
+      </div>
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          formControlName="displayName"
+        />
+      </mat-form-field>
+      </div>
     <div class="row flex-nowrap">
       <div class="col-3">
 
@@ -57,7 +69,6 @@
           type="text"
           matInput
           formControlName="email"
-          [disabled]
         />
       </mat-form-field>
       </div>

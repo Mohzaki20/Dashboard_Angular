@@ -14,6 +14,7 @@ import {
   redirectLoggedInTo,
   redirectUnauthorizedTo,
 } from '@angular/fire/auth-guard';
+import { ContactUsComponent } from './component/contact-us/contact-us.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
@@ -46,7 +47,10 @@ const routes: Routes = [
 component:TablesComponent,
 ...canActivate(redirectUnauthorizedToLogin),
 },
-
+{path:'contact',
+component:ContactUsComponent,
+...canActivate(redirectUnauthorizedToLogin),
+},
 
 //  {path: '' ,component: LoginComponent , pathMatch:'full'} ,
 // {path:"register", component:RegisterComponent} ,

@@ -4,9 +4,11 @@ export interface ICategory {
   description: string;
   images: string[];
   price: number;
-  // SellerId: string;
+  SellerId: string;
+  uid?:string,
   rating: number;
   stock: number;
   title: string;
   thumbnail: string;
+  color?:string;
 }

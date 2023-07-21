@@ -2,7 +2,9 @@
 
   <!-- Sidebar - Brand -->
   <div>
-    <img class="logo-img" src="../assets/amazon-logo-editorial-free-vector.jpg" alt="" width="200" height="">
+  <a routerLink="/">
+    <img  class="logo-img" src="../assets/amazon-logo-editorial-free-vector.jpg" alt="" width="200" height="">
+  </a>
   </div>
 
   <!-- Divider -->
@@ -48,6 +50,19 @@
       <span>user page</span>
     </a>
   </li>
+  <ng-container *ngIf="user$ | async as user;else landing ">
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" routerLink="contact" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+        aria-controls="collapsePages">
+        <i class="fas fa-fw fa-user-lock"></i>
+        <span>contact us</span>
+      </a>
+    </li>
+</ng-container>
+<ng-template #landing>
+
+
   <li class="nav-item">
     <a class="nav-link collapsed" routerLink="login" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
       aria-controls="collapsePages">
@@ -62,7 +77,7 @@
       <span>Register</span>
     </a>
   </li>
-
+</ng-template>
   <!-- Nav Item - Tables -->
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">

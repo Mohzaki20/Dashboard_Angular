@@ -8,7 +8,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+// import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { HomeComponent } from 'src/app/component/home/home.component';
 import { ChartsComponent } from './component/charts/charts.component';
@@ -37,8 +37,8 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import { getStorage, provideStorage } from '@angular/fire/storage';
-import { HotToastModule } from '@ngneat/hot-toast';
 import { ToastrModule, provideToastr } from 'ngx-toastr';
+import { ContactUsComponent } from './component/contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +51,8 @@ import { ToastrModule, provideToastr } from 'ngx-toastr';
     NavbarComponent,
     SidebarComponent,
     HomeComponent,
-    LayoutComponent
+    LayoutComponent,
+    ContactUsComponent
 
 
   ],
@@ -69,8 +70,8 @@ import { ToastrModule, provideToastr } from 'ngx-toastr';
     ReactiveFormsModule,
      provideFirebaseApp(() => initializeApp(environmentdevelopment.firebase)),
     AngularFireModule.initializeApp(environmentdevelopment.firebase),
-    SweetAlert2Module.forRoot(),
-    SweetAlert2Module,
+    // SweetAlert2Module.forRoot(),
+    // SweetAlert2Module,
 
     BrowserModule,
     FormsModule,
@@ -95,8 +96,7 @@ import { ToastrModule, provideToastr } from 'ngx-toastr';
     MatSortModule,
     MatPaginatorModule,
     MatTableModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [
     provideAnimations(), // required animations providers

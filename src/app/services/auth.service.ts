@@ -3,7 +3,7 @@ import { GoogleAuthProvider, getAuth} from '@angular/fire/auth';
 import {AngularFireAuth} from '@angular/fire/compat/auth'
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { Userinfo } from '../models/userinfo';
+import { Userinfo } from 'src/app/Models/userinfo';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { concatMap, from, Observable, of, switchMap } from 'rxjs';

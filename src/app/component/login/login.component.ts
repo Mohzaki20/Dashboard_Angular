@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HotToastService } from '@ngneat/hot-toast';
+// import { HotToastService } from '@ngneat/hot-toast';
 import { AuthService } from 'src/app/services/auth.service';
-import { HotToastModule } from '@ngneat/hot-toast';
+// import { HotToastModule } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,7 @@ export class LoginComponent  implements OnInit{
 
   constructor(private auth:AuthService ,
     private fb: NonNullableFormBuilder,
-    private toast: HotToastService,
+    // private toast: HotToastService,
     private router:Router,
 
     ){
@@ -49,11 +49,7 @@ export class LoginComponent  implements OnInit{
     this.auth
       .login(email, password)
       .pipe(
-        this.toast.observe({
-          success: 'Logged in successfully',
-          loading: 'Logging in...',
-          error: ({ message }) => `There was an error: ${message} `,
-        })
+
       )
       .subscribe(() => {
         this.router.navigate(['']);
