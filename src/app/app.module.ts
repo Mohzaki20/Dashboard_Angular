@@ -39,6 +39,7 @@ import {MatTableModule} from '@angular/material/table';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { ToastrModule, provideToastr } from 'ngx-toastr';
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
+import { DoughnutComponent } from './component/doughnut/doughnut.component';
 
 @NgModule({
   declarations: [
@@ -52,9 +53,8 @@ import { ContactUsComponent } from './component/contact-us/contact-us.component'
     SidebarComponent,
     HomeComponent,
     LayoutComponent,
-    ContactUsComponent
-
-
+    ContactUsComponent,
+    DoughnutComponent,
   ],
 
 
@@ -68,7 +68,7 @@ import { ContactUsComponent } from './component/contact-us/contact-us.component'
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-     provideFirebaseApp(() => initializeApp(environmentdevelopment.firebase)),
+      provideFirebaseApp(() => initializeApp(environmentdevelopment.firebase)),
     AngularFireModule.initializeApp(environmentdevelopment.firebase),
     // SweetAlert2Module.forRoot(),
     // SweetAlert2Module,
