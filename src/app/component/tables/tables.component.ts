@@ -213,7 +213,7 @@ export class TablesComponent implements OnInit {
       .valueChanges()
       .subscribe((data) => {
         this.editForm.setValue(data);
-        this.editForm.value.images=data.images
+        this.images=data.images
       });
     this.productId = id;
   }
@@ -224,7 +224,7 @@ export class TablesComponent implements OnInit {
       brand: ['', [Validators.required]],
       price: ['', [Validators.required]],
       title: ['', [Validators.required]],
-      images: [[], [Validators.required]],
+      images: this.images,
       SellerId: ['', [Validators.required]],
       description:['', [Validators.required]],
       rating:['', [Validators.required]],

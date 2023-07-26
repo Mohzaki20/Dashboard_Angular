@@ -216,6 +216,7 @@ pre {
 
 .dash {
   display: flex;
+  width:100%;
 }
 
 .dash .content {

@@ -1,16 +1,4 @@
-/* table{
-  background-color: black !important;
-  width: 95%;
-} */
-/* tr{
-  background-color: rgb(132, 129, 129);
-}
-td{
-  background-color: lightgrey;
-} */
-/* table, th, td {
-  border: 1px solid black;
-} */
+
 form{
   width: 80%;
   margin-left: 2%;
@@ -46,6 +34,15 @@ td, th {
   /* width: 25%; */
   background-color: rgb(239, 243, 243);
 }
+td{
+  overflow: hidden;
+   -webkit-line-clamp: 1;
+   line-break: anywhere;
+}
 .mat-sort-header{
   color: black;
+}
+.mat-mdc-table{
+  table-layout:fixed;
+
 }
