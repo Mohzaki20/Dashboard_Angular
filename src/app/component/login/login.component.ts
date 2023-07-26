@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+// import { HotToastService } from '@ngneat/hot-toast';
 import { AuthService } from 'src/app/services/auth.service';
+// import { HotToastModule } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +14,12 @@ export class LoginComponent  implements OnInit{
   loginform:FormGroup;
 
 
-  constructor(private auth:AuthService ,private fb:FormBuilder){
+  constructor(private auth:AuthService ,
+    private fb: NonNullableFormBuilder,
+    // private toast: HotToastService,
+    private router:Router,
+
+    ){
     this.loginform=this.fb.group({
       email:['', [Validators.required,Validators.email]],
       password:['', [Validators.required,Validators.minLength(6)]]
@@ -22,10 +30,30 @@ export class LoginComponent  implements OnInit{
 
   }
 
+  get email() {
+    return this.loginform.get('email');
+  }
 
+  get password() {
+    return this.loginform.get('password');
+  }
+  // login2(){
+
+  //   const userdata=Object.assign(this.loginform.value,{email:this.loginform.value.email})
+  //   this.auth.login(userdata)
+
+  // }
   login(){
-    const userdata=Object.assign(this.loginform.value,{email:this.loginform.value.email})
-    this.auth.login(userdata)
+
+    const { email, password } = this.loginform.value;
+    this.auth
+      .login(email, password)
+      .pipe(
+
+      )
+      .subscribe(() => {
+        this.router.navigate(['']);
+      });
 
   }
   loginwithgoogle(){

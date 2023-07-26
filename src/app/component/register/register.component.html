@@ -1,7 +1,7 @@
 
-<div class="container bg-dark">
+<div class="container  p-0">
 
-  <div class="card o-hidden border-0 shadow-lg my-5  w-100">
+  <div class="card o-hidden border-0 shadow-lg my-1  w-100">
       <div class="card-body p-0 ">
           <!-- Nested Row within Card Body -->
           <div class="row ">
@@ -11,19 +11,19 @@
                       <div class="text-center">
                           <h1 class="h4 text-gray-900 mb-2">Create an Account!</h1>
                       </div>
-                      <form class="user" autocomplete="off" [formGroup]="registform"  >
+                      <form class="user" autocomplete="off" [formGroup]="registform" (ngSubmit)="submit()" >
                           <div class="form-group row">
                               <div class="col-sm-6 mb-3 mb-sm-0">
                                   <input   type="text" class="form-control form-control-user" id="exampleFirstName"
-                                   name="firstName"
-                                   [class.is-valid]="registform.get('firstName')?.valid"
-                                   formControlName="firstName"
-                                   [ngClass]="{'is-invalid':(registform.get('firstName')?.touched||registform.get('firstName')?.dirty)
-                                   && !registform.get('firstName')?.valid}"
+                                   name="firstname"
+                                   [class.is-valid]="registform.get('firstname')?.valid"
+                                   formControlName="firstname"
+                                   [ngClass]="{'is-invalid':(registform.get('firstname')?.touched||registform.get('firstname')?.dirty)
+                                   && !registform.get('firstname')?.valid}"
                                   placeholder="First Name">
-                                  <div  class="text-danger errormessage" [hidden]="registform.get('firstName')?.valid ||registform.get('firstName')?.untouched">
-                                    <div *ngIf="(registform.get('firstName')?.errors?.['required'])" >required</div>
-                                    <div *ngIf="(registform.get('firstName')?.errors?.['pattern'])">first name is invalid</div>
+                                  <div  class="text-danger errormessage" [hidden]="registform.get('firstname')?.valid ||registform.get('firstname')?.untouched">
+                                    <div *ngIf="(registform.get('firstname')?.errors?.['required'])" >required</div>
+                                    <div *ngIf="(registform.get('firstname')?.errors?.['pattern'])">first name is invalid</div>
 
                                   </div>
 
@@ -31,15 +31,16 @@
                               </div>
                               <div class="col-sm-6">
                                   <input  type="text" class="form-control form-control-user" id="exampleLastName"
-                                  name="lastName"
-                                  [class.is-valid]="registform.get('lastName')?.valid"
-                                  formControlName="lastName"
-                                  [ngClass]="{'is-invalid':(registform.get('lastName')?.touched||registform.get('lastName')?.dirty)
-                                  && !registform.get('lastName')?.valid}"
+                                  name="lastname"
+
+                                  [class.is-valid]="registform.get('lastname')?.valid"
+                                  formControlName="lastname"
+                                  [ngClass]="{'is-invalid':(registform.get('lastname')?.touched||registform.get('lastname')?.dirty)
+                                  && !registform.get('lastname')?.valid}"
                                       placeholder="Last Name">
-                                      <div  class="text-danger errormessage" [hidden]="registform.get('lastName')?.valid ||registform.get('lastName')?.untouched">
-                                        <div *ngIf="(registform.get('lastName')?.errors?.['required'])" >required</div>
-                                        <div *ngIf="(registform.get('lastName')?.errors?.['pattern'])">last name is invalid</div>
+                                      <div  class="text-danger errormessage" [hidden]="registform.get('lastname')?.valid ||registform.get('lastname')?.untouched">
+                                        <div *ngIf="(registform.get('lastname')?.errors?.['required'])" >required</div>
+                                        <div *ngIf="(registform.get('lastname')?.errors?.['pattern'])">last name is invalid</div>
 
                                       </div>
                               </div>
@@ -87,9 +88,12 @@
                                         <div *ngIf="(registform.get('repeatpassword')?.errors?.['minLength'])">password at lest 6 characters</div>
 
                                       </div>
+                                      <mat-error *ngIf="registform.errors?.['passwordsDontMatch']">
+                                        Passwords should match
+                                    </mat-error>
                               </div>
                           </div>
-                          <button (click)="register()" [disabled]="registform.invalid" class="btn btn-primary btn-user btn-block">
+                          <button  type="submit"   [disabled]="registform.invalid" class="btn btn-primary btn-user btn-block">
                               Register Accounts
                           </button>
                           <hr>
@@ -101,11 +105,11 @@
                           </a>
                       </form>
                       <hr>
-                      <div class="text-center">
+                      <!-- <div class="text-center">
                           <a class="small" href="forgot-password.html">Forgot Password?</a>
-                      </div>
+                      </div> -->
                       <div class="text-center">
-                          <a class="small" href="/login">Already have an account? Login!</a>
+                          <a class="small" routerLink="/login">Already have an account? Login!</a>
                       </div>
                   </div>
               </div>

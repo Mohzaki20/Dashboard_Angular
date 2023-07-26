@@ -1,7 +1,106 @@
-<p>home-mos works!</p>
+<div
+  class="form-container mat-elevation-z5 text-center mt-5"
 
+>
+  <h1>Update Profile</h1>
+  <div class="profile-image"  *ngIf="user$ | async as user">
+    <img
+    width="120"
+    height="120"
+    class="margin-top mat-elevation-z1"
+    [src]="user.photoURL ?? 'assets/images.png'"
+  />
+    <button mat-mini-fab (click)="inputField.click()">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <input #inputField hidden type="file" (change)="uploadFile($event, user)" />
 
-<div class="d-flex">
+  </div>
+
+  <form class="margin-top" [formGroup]="profileForm" (ngSubmit)="saveProfile()" >
+    <div class="row flex-nowrap">
+      <div class="col-3">
+      first name:
+    </div>
+
+      <mat-form-field>
+        <input
+          type="text"
+          formControlName="firstname"
+
+          matInput
+        />
+      </mat-form-field>
+      </div>
+      <div class="row flex-nowrap">
+        <div class="col-3">
+
+      last name:
+</div>
+      <mat-form-field>
+        <input
+          type="text"
+          formControlName="lastname"
+
+          matInput
+        />
+      </mat-form-field>
+    </div>
+    <div class="row flex-nowrap">
+      <div class="col-3">
+
+      name:
+      </div>
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          formControlName="displayName"
+        />
+      </mat-form-field>
+      </div>
+    <div class="row flex-nowrap">
+      <div class="col-3">
+
+      email:
+      </div>
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          formControlName="email"
+        />
+      </mat-form-field>
+      </div>
+      <div class="row flex-nowrap">
+        <div class="col-3">
+
+      password:
+</div>
+      <mat-form-field>
+        <input
+          type="password"
+          formControlName="password"
+          matInput
+        />
+      </mat-form-field>
+</div>
+      <!-- <mat-form-field>
+        <input
+          type="text"
+          matInput
+          placeholder="Address"
+        />
+      </mat-form-field> -->
+
+<br>
+    <button type="submit" (click)="saveProfile()"  class="margin-top" mat-raised-button color="primary">
+      Save
+    </button>
+
+  </form>
+</div>
+<!-- <div class="d-flex">
 <div >
   hello user
   <button (click)="getuser()">get</button>
@@ -11,34 +110,34 @@
   <button (click)="logout()">logout</button>
   <div class="imagediv">
   <img [src]="base64" alt=""   style="width: 100%; height: 100%;border-radius: 50%; border: 1px solid gray; box-shadow: 2px 2px 2px 2px gray;"/>
-  <input type="file"   class="form-control" id="Img"  name="img" (change)="getImagepath($event)"  style="width: 100px;">
-   </div>
+   </div> -->
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
+<!-- <button
+  type="button"
+  class="btn btn-primary addProductButton"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+>
+  edit photo
 </button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">edit  photo</h1>
+
       </div>
-      <div class="modal-body">
-        ...
+      <div >
+        <img [src]="base64" alt=""   style="width: 80%; height: 70%; border: 1px solid gray; box-shadow: 2px 2px 2px 2px gray;"/>
+        <input type="file"   class="form-control" id="Img"  name="img" (change)="getImagepath($event)"  style="width: 100px;">
+         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
   </div>
-</div>
-</div>
-</div>
-
-
+</div>   -->

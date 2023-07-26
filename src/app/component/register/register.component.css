@@ -271,7 +271,8 @@ button,
 [type="button"],
 [type="reset"],
 [type="submit"] {
-  -webkit-appearance: button;
+  /* -webkit-appearance :inherit; */
+  font-weight: 400;
 }
 
 button:not(:disabled),
@@ -330,7 +331,7 @@ progress {
 
 [type="search"] {
   outline-offset: -2px;
-  -webkit-appearance: none;
+  /* -webkit-appearance: none; */
 }
 
 [type="search"]::-webkit-search-decoration {
@@ -428,7 +429,7 @@ hr {
 
 small,
 .small {
-  font-size: 80%;
+  font-size: 1.3rem;
   font-weight: 400;
 }
 
@@ -3552,8 +3553,7 @@ input[type="button"].btn-block {
   display: block;
   min-height: 1.5rem;
   padding-left: 1.5rem;
-  -webkit-print-color-adjust: exact;
-  color-adjust: exact;
+
 }
 
 .custom-control-inline {
