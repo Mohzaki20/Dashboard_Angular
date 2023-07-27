@@ -20,7 +20,7 @@ export class ChartsComponent implements OnInit {
     new Chart("piechart", {
       type: 'bar',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
         datasets: [{
           label: '# of Votes',
           data: [12, 11, 33, 5, 2, 3],
