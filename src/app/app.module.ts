@@ -40,7 +40,6 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { ToastrModule, provideToastr } from 'ngx-toastr';
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
 import { DoughnutComponent } from './component/doughnut/doughnut.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -96,7 +95,7 @@ import { DoughnutComponent } from './component/doughnut/doughnut.component';
     MatSortModule,
     MatPaginatorModule,
     MatTableModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [
     provideAnimations(), // required animations providers

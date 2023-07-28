@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-// import { HotToastService } from '@ngneat/hot-toast';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 // import { HotToastModule } from '@ngneat/hot-toast';
 
@@ -16,7 +16,7 @@ export class LoginComponent  implements OnInit{
 
   constructor(private auth:AuthService ,
     private fb: NonNullableFormBuilder,
-    // private toast: HotToastService,
+    private toast: ToastrService,
     private router:Router,
 
     ){
@@ -49,9 +49,9 @@ export class LoginComponent  implements OnInit{
     this.auth
       .login(email, password)
       .pipe(
-
       )
       .subscribe(() => {
+        this.toast.success('Login Success')
         this.router.navigate(['']);
       });
 

@@ -57,16 +57,19 @@ export class ProductService {
   }
 
 
-   addmsg(product: messages) {
+  addmsg(product: messages) {
     product.id = this.firestore.createId();
     return  this.firestore.collection('usersmsg').add(product).then(()=>{
       this.toast.success('you have add message successfully')
     }).catch(err => {
       this.toast.error('some error occured')
     });
-  }
+ }
 
   getmsg(value: string) {
     return this.firestore.collection('usersmsg',ref => ref.where('uid', '==', value)).snapshotChanges();
+  }
+  deleteMsg(msg:messages) {
+    return this.firestore.collection('usersmsg').doc(msg.id).delete();
   }
 }

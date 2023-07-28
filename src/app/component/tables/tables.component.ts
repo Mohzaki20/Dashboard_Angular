@@ -214,6 +214,7 @@ export class TablesComponent implements OnInit {
       .subscribe((data) => {
         this.editForm.setValue(data);
         this.images=data.images
+        this.color=data.color
       });
     this.productId = id;
   }

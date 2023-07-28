@@ -88,15 +88,9 @@ export class RegisterComponent implements OnInit {
         switchMap(({ user: { uid } }) =>
         this.userservice.addUser({uid , email , firstname ,lastname,password, displayName:firstname })
         )
-        // ,
-        // this.toast.observe({
-        //   success: 'Congrats! You are all signed up',
-        //   loading: 'Signing up...',
-        //   error: ({ message }) => `${message}`,
-        // }
-        // )
       )
       .subscribe(() => {
+        this.toast.success('Successfully sign up')
         this.router.navigate(['']);
       });
   }
