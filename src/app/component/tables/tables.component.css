@@ -43,6 +43,6 @@ td{
   color: black;
 }
 .mat-mdc-table{
-  table-layout:fixed;
+  table-layout: auto;
 
 }

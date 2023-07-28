@@ -75,6 +75,13 @@ export class ContactUsComponent implements OnInit {
       });
   })
   }
+  hidemsg(){
+    this.full=true;
+
+  }
+  deletemsg(msg:messages){
+    this.products.deleteMsg(msg)
+  }
 
 
 }

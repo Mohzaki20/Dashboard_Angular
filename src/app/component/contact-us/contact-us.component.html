@@ -1,6 +1,6 @@
 
 <div
-  class="form-container mat-elevation-z5 text-center mt-5 w-100"
+  class="form-container mat-elevation-z5 text-center mt-3 w-100"
 >
 <section>
 
@@ -56,18 +56,38 @@
         <form action="" id="contact-form" [formGroup]="msgform" >
           <h2>Send Message</h2>
           <div class="input-box">
-            <input type="text" name="fullname" formControlName="fullname">
-            <span>Full Name</span>
+            <label for="floatingInputGroup2">Full Name</label>
+
+            <input type="text"
+            type="text"
+            class="form-control border"
+            id="floatingInputGroup2"
+             name="fullname"
+             formControlName="fullname">
+
+            <!-- <span>Full Name</span> -->
           </div>
 
           <div class="input-box">
-            <input type="email" name="email" formControlName="email">
-            <span>Email</span>
-          </div>
+            <label for="floatingInputGroup2">Email</label>
+
+            <input type="email"
+            class="form-control border"
+            id="floatingInputGroup2"
+             name="email"
+             formControlName="email">
+            </div>
 
           <div class="input-box">
-            <textarea name="msg" formControlName="msg"></textarea>
-            <span>Type your Message...</span>
+            <label for="floatingInputGroup2">Type your Message...</label>
+
+            <textarea
+            class="form-control border"
+            id="floatingInputGroup2"
+             name="msg"
+            formControlName="msg"></textarea>
+
+            <!-- <span>Type your Message...</span> -->
           </div>
 
           <div class="input-box">
@@ -83,7 +103,9 @@
   <button (click)="getmessages()" class="btn btn-dark p-2">show your messages </button>
 </ng-container>
 <ng-template #landing>
- <div class="w-100" style="overflow: scroll;">
+  <button (click)="hidemsg()" class="btn btn-dark p-2 mb-1">Hide messages </button>
+
+ <div class="w-100" style="overflow: scroll;height: 143px;">
 <table class="table table-dark" style="overflow: scroll;">
   <thead>
     <tr>
@@ -91,17 +113,29 @@
       <th scope="col">Fullname</th>
       <th scope="col">Email</th>
       <th scope="col">Message</th>
+      <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody >
+     <ng-container *ngIf="msgs.length==0;else tabledata">
+      <tr rowspan="3">
+        <td colspan="5">
+          <div style="font-size: 20px;">You dont send any Messages before</div>
+        </td>
+      </tr>
+
+     </ng-container>
+     <ng-template #tabledata>
      <tr *ngFor=" let element of msgs;let indexOfelement=index; " style="overflow-x:hidden;" >
       <td >{{indexOfelement+1}}</td>
       <td>{{element.fullname}}</td>
       <td>{{element.email}}</td>
       <td >{{element.msg}}</td>
+      <td><button (click)="deletemsg(element)" mat-mini-fab style="background-color:rgb(64, 168, 194) "><mat-icon>delete</mat-icon></button></td>
 
 
      </tr>
+    </ng-template>
   </tbody>
 </table>
 </div>
