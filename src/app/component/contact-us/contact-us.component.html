@@ -16,38 +16,47 @@
 
       <div class="contact-info">
         <div class="contact-info-item ">
-          <div class="contact-info-icon">
-            <i class="fas fa-home"></i>
-          </div>
+          <div class="contact-info-icon d-flex" >
+            <fa-icon
+            [icon]="faHome"
+            class="fa-2x"
+            style="cursor: pointer;margin: auto;"
+          ></fa-icon>           </div>
 
           <div class="contact-info-content ">
-            <h4>Address</h4>
-            <p>cairo, Egypt <br/>55060</p>
+            <h4 style="text-align: left;padding-left: 18px;">Address</h4>
+            <p>cairo, Egypt ,55060</p>
           </div>
         </div>
 
         <div class="contact-info-item  ">
-          <div class="contact-info-icon">
-            <i class="fas fa-phone"></i>
-          </div>
+          <div class="contact-info-icon d-flex">
+            <fa-icon
+            [icon]="faPhone"
+            class="fa-2x"
+            style="cursor: pointer;margin: auto;"
+          ></fa-icon>
+               </div>
 
           <div class="contact-info-content ">
-            <h4>Phone</h4>
-            <p>561-456-2321</p>
-            <p>561-456-2321</p>
+            <h4   style="text-align: left; padding-left: 18px;">Phone</h4>
+            <p>01069689268</p>
 
           </div>
         </div>
 
         <div class="contact-info-item  ">
-          <div class="contact-info-icon">
-            <i class="fas fa-envelope"></i>
-          </div>
+          <div class="contact-info-icon d-flex">
+            <fa-icon
+            [icon]="faEnvelope"
+            class="fa-2x"
+            style="cursor: pointer;margin: auto;"
+          ></fa-icon>
+               </div>
 
           <div class="contact-info-content">
-            <h4>Email</h4>
-           <p>example@email.com</p>
-           <p>example@email.com</p>
+            <h4 style="text-align: left;   padding-left: 18px;">Email</h4>
+           <p>mostafahisham5060@email.com</p>
           </div>
         </div>
       </div>
@@ -131,7 +140,13 @@
       <td>{{element.fullname}}</td>
       <td>{{element.email}}</td>
       <td >{{element.msg}}</td>
-      <td><button (click)="deletemsg(element)" mat-mini-fab style="background-color:rgb(64, 168, 194) "><mat-icon>delete</mat-icon></button></td>
+
+      <td><button (click)="deletemsg(element)"style="background-color: transparent;" >
+        <fa-icon
+        [icon]="faTrashAlt"
+        class="fa-2x "
+        style="cursor: pointer;margin: auto; color:red"
+      ></fa-icon></button></td>
 
 
      </tr>
