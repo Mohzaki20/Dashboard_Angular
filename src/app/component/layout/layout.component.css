@@ -147,7 +147,7 @@ body {
 .button1 {
   position: absolute;
   left: calc(58% - 3em);
-  top: calc(85% - 2em);
+  top: calc(90% - 2em);
 
   height: 4vw;
   width: 10.5vw;
@@ -165,7 +165,7 @@ body {
 .button2 {
   position: absolute;
   left: calc(42% - 3em);
-  top: calc(85% - 2em);
+  top: calc(90% - 2em);
 
   height: 4vw;
   width: 10.5vw;

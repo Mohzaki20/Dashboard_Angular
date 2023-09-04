@@ -5,6 +5,7 @@ import { delay } from 'rxjs/operators';
 import { messages } from 'src/app/Models/photos';
 import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
+import { faPhone,faHome,faEnvelope,faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-contact-us',
@@ -12,6 +13,10 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./contact-us.component.css']
 })
 export class ContactUsComponent implements OnInit {
+  faPhone = faPhone;
+  faHome = faHome;
+  faEnvelope=faEnvelope;
+  faTrashAlt=faTrashAlt;
   user$ = this.userservice.currentUserProfile$;
   uid: string='';
   msgs:messages[] = [];

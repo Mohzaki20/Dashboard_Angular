@@ -163,12 +163,6 @@ section {
   color: #666;
 }
 
-/* .contact-form .input-box  input:focus ~ span,
-.contact-form .input-box textarea:focus ~ span{
-  color: #e91e63;
-  font-size: 12px;
-  transform: translateY(-20px);
-} */
 
 .contact-form .input-box input[type="submit"]
 {
