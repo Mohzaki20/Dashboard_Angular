@@ -10,11 +10,11 @@
 
 <h2>Project Screenshots:</h2>
 
-<img src="https://firebasestorage.googleapis.com/v0/b/fir-eb561.appspot.com/o/FireShot%20Capture%20024%20-%20Dashboard%20-%20localhost.png?alt=media&amp;token=fa200ce4-7b37-465a-b2bc-419a800d12b6" alt="project-screenshot" width="200" height="200/">
+<img src="https://firebasestorage.googleapis.com/v0/b/fir-eb561.appspot.com/o/FireShot%20Capture%20024%20-%20Dashboard%20-%20localhost.png?alt=media&amp;token=fa200ce4-7b37-465a-b2bc-419a800d12b6" alt="project-screenshot" width="150" height="200/">
 
-<img src="https://firebasestorage.googleapis.com/v0/b/fir-eb561.appspot.com/o/FireShot%20Capture%20026%20-%20Dashboard%20-%20localhost.png?alt=media&amp;token=6ff09f65-b1d6-4644-a9df-64b4e762ccd2" alt="project-screenshot" width="200" height="400/">
+<img src="https://firebasestorage.googleapis.com/v0/b/fir-eb561.appspot.com/o/FireShot%20Capture%20026%20-%20Dashboard%20-%20localhost.png?alt=media&amp;token=6ff09f65-b1d6-4644-a9df-64b4e762ccd2" alt="project-screenshot" width="150" height="200/">
 
-<img src="https://firebasestorage.googleapis.com/v0/b/fir-eb561.appspot.com/o/FireShot%20Capture%20027%20-%20Dashboard%20-%20localhost.png?alt=media&amp;token=1f2eb281-f3d7-4426-8b77-bb1d4e0140ad" alt="project-screenshot" width="200" height="400/">
+<img src="https://firebasestorage.googleapis.com/v0/b/fir-eb561.appspot.com/o/FireShot%20Capture%20027%20-%20Dashboard%20-%20localhost.png?alt=media&amp;token=1f2eb281-f3d7-4426-8b77-bb1d4e0140ad" alt="project-screenshot" width="150" height="200/">
 
   
   
