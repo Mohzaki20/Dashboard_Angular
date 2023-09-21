@@ -1,27 +1,66 @@
-# Dashboard
+<h1 align="center" id="title">Dashboard</h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.0.
+<p align="center"><img src="https://socialify.git.ci/Mohzaki20/Dashboard_Angular/image?language=1&amp;name=1&amp;owner=1&amp;theme=Light" alt="project-image"></p>
 
-## Development server
+<p id="description">Seller Dashboard: Manage Your E-commerce Products with Ease Our Seller Dashboard provides a convenient platform for sellers to effortlessly add delete and update their products on our e-commerce platform. Additionally you can access detailed earnings charts ensuring you stay informed about your sales performance. The dashboard includes robust authentication and authorization features to ensure secure access to your account.</p>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+<h2>🚀 Demo</h2>
 
-## Code scaffolding
+[https://subtle-kulfi-352a4d.netlify.app/](https://subtle-kulfi-352a4d.netlify.app/)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+<h2>Project Screenshots:</h2>
 
-## Build
+<img src="https://firebasestorage.googleapis.com/v0/b/fir-eb561.appspot.com/o/FireShot%20Capture%20024%20-%20Dashboard%20-%20localhost.png?alt=media&amp;token=fa200ce4-7b37-465a-b2bc-419a800d12b6" alt="project-screenshot" width="200" height="200/">
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+<img src="https://firebasestorage.googleapis.com/v0/b/fir-eb561.appspot.com/o/FireShot%20Capture%20026%20-%20Dashboard%20-%20localhost.png?alt=media&amp;token=6ff09f65-b1d6-4644-a9df-64b4e762ccd2" alt="project-screenshot" width="200" height="400/">
 
-## Running unit tests
+<img src="https://firebasestorage.googleapis.com/v0/b/fir-eb561.appspot.com/o/FireShot%20Capture%20027%20-%20Dashboard%20-%20localhost.png?alt=media&amp;token=1f2eb281-f3d7-4426-8b77-bb1d4e0140ad" alt="project-screenshot" width="200" height="400/">
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+  
+  
+<h2>🧐 Features</h2>
 
-## Running end-to-end tests
+Here're some of the project's best features:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+*   Add Products
+*   Update Products
+*   Delete Products
+*   Authentication
+*   Authorization
+*   Charts
+*   Profile for seller
 
-## Further help
+<h2>🛠️ Installation Steps:</h2>
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+<p>1. Pull Project</p>
+
+```
+git clone https://github.com/Mohzaki20/Dashboard_Angular.git
+```
+
+<p>2. Install ng</p>
+
+```
+npm install -g @angular/cli
+```
+
+<p>3. Run Project</p>
+
+```
+ng serve
+```
+
+  
+  
+<h2>💻 Built with</h2>
+
+Technologies used in the project:
+
+*   Angular
+*   Bootstrap
+*   Charts.js
+*   zone.js
+*   sweetalert
+*   Firebase
+*   Jquery
+*   Popper.js
